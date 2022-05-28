@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: c, 星火燎原">
+    <meta name="keywords" content="标签: gdb, 星火燎原">
     <meta name="description" content="星星之火，可以燎原">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -19,7 +19,7 @@
 
     
 
-    <title>分类: c | 星火燎原</title>
+    <title>标签: gdb | 星火燎原</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -337,37 +337,53 @@
 
     
 
-<div id="category-cloud" class="container chip-container">
+<div id="tags" class="container chip-container">
     <div class="card">
         <div class="card-content">
             <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
+                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
             </div>
             <div class="tag-chips">
                 
                 
-                
-                <a href="/categories/c/" title="c: 2">
+                <a href="/tags/c/" title="c: 2">
                     <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #F9EBEA;">c
+                             chip-default "
+                            data-tagname="c" style="background-color: #F9EBEA;">c
                         <span class="tag-length">2</span>
                     </span>
                 </a>
                 
+                
+                <a href="/tags/linux/" title="linux: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="linux" style="background-color: #F5EEF8;">linux
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/gdb/" title="gdb: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active "
+                            data-tagname="gdb" style="background-color: #D5F5E3;">gdb
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
                 
             </div>
         </div>
     </div>
 </div>
 
-
     
 
     <article id="articles" class="container articles">
         <div class="row tags-posts">
             
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+            
+            <div class="article tag-post col s12 m6 l4" data-tags="c, linux, gdb" data-aos="fade-up">
                 <div class="card">
                     <a href="/2022/05/28/c%E7%A8%8B%E5%BA%8F%E5%AE%9A%E4%BD%8D%E6%AE%B5%E9%94%99%E8%AF%AFsegment-fault/">
                         <div class="card-image tag-image">
@@ -379,12 +395,6 @@
                         </div>
                     </a>
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                c程序定位段错误segment fault
-在编写c语言程序时，会经常不小心写出 段错误 的bug代码，但是又不知道导致段错误的代码，有小伙伴会说，可以gdb一行一行地调试啊，虽然这样是可以的，但是效率太低，接下来我会演示一下如何定位段错误
-                            
-                        </div>
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-05-28
@@ -394,83 +404,13 @@
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
                                 <a href="/categories/c/" class="post-category">
-                                    c
+                                c
                                 </a>
                                 
                                 
                             </span>
                         </div>
                     </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/c/">
-                            <span class="chip bg-color">c</span>
-                        </a>
-                        
-                        <a href="/tags/linux/">
-                            <span class="chip bg-color">linux</span>
-                        </a>
-                        
-                        <a href="/tags/gdb/">
-                            <span class="chip bg-color">gdb</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2022/05/27/%E5%AE%9E%E7%8E%B0linux%E7%9A%84cat%E5%91%BD%E4%BB%A4/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="实现linux的cat命令">
-                            
-                            <span class="card-title">实现linux的cat命令</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                实现linux的cat命令cat命令简介
-首先linux的命令手册: man cat  1cat - concatenate files and print on the standard output
-cat1: 在终端设备上显示文件内容
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-27
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/c/" class="post-category">
-                                    c
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/c/">
-                            <span class="chip bg-color">c</span>
-                        </a>
-                        
-                        <a href="/tags/linux/">
-                            <span class="chip bg-color">linux</span>
-                        </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
             

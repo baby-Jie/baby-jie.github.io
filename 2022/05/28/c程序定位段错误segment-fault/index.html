@@ -4,10 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="实现linux的cat命令, 星火燎原">
-    <meta name="description" content="实现linux的cat命令cat命令简介
-首先linux的命令手册: man cat  1cat - concatenate files and print on the standard output
-cat1: 在终端设备上显示文件内容">
+    <meta name="keywords" content="c程序定位段错误segment fault, 星火燎原">
+    <meta name="description" content="c程序定位段错误segment fault
+在编写c语言程序时，会经常不小心写出 段错误 的bug代码，但是又不知道导致段错误的代码，有小伙伴会说，可以gdb一行一行地调试啊，虽然这样是可以的，但是效率太低，接下来我会演示一下如何定位段错误">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +20,7 @@ cat1: 在终端设备上显示文件内容">
 
     
 
-    <title>实现linux的cat命令 | 星火燎原</title>
+    <title>c程序定位段错误segment fault | 星火燎原</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -291,12 +290,12 @@ cat1: 在终端设备上显示文件内容">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">实现linux的cat命令</h1>
+                    <h1 class="description center-align post-title">c程序定位段错误segment fault</h1>
                 </div>
             </div>
         </div>
@@ -420,6 +419,10 @@ cat1: 在终端设备上显示文件内容">
                                 <span class="chip bg-color">linux</span>
                             </a>
                         
+                            <a href="/tags/gdb/">
+                                <span class="chip bg-color">gdb</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -441,7 +444,7 @@ cat1: 在终端设备上显示文件内容">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-05-27
+                    2022-05-28
                 </div>
                 
 
@@ -462,88 +465,41 @@ cat1: 在终端设备上显示文件内容">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="实现linux的cat命令"><a href="#实现linux的cat命令" class="headerlink" title="实现linux的cat命令"></a>实现linux的cat命令</h1><h2 id="cat命令简介"><a href="#cat命令简介" class="headerlink" title="cat命令简介"></a>cat命令简介</h2><ul>
-<li>首先linux的命令手册: <code>man cat</code>  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat - concatenate files and print on the standard output</span><br></pre></td></tr></tbody></table></figure></li>
-<li><a target="_blank" rel="noopener" href="https://www.linuxcool.com/cat">cat</a><sup>1</sup>: 在终端设备上显示文件内容，其功能是用于查看文件内容</li>
+                <h1 id="c程序定位段错误segment-fault"><a href="#c程序定位段错误segment-fault" class="headerlink" title="c程序定位段错误segment fault"></a>c程序定位段错误segment fault</h1><ul>
+<li>在编写c语言程序时，会经常不小心写出 段错误 的bug代码，但是又不知道导致段错误的代码，有小伙伴会说，可以gdb一行一行地调试啊，虽然这样是可以的，但是效率太低，接下来我会演示一下如何定位段错误的位置</li>
 </ul>
-<h2 id="C代码实现"><a href="#C代码实现" class="headerlink" title="C代码实现"></a>C代码实现</h2><ul>
-<li><p>首先看几个函数</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/c_standard_library/c_function_fopen.htm">fopen</a><sup>2</sup>: The C library function <code>FILE *fopen(const char *filename, const char *mode)</code> opens the filename pointed to, by filename using the given mode.<ul>
-<li>打开文件，返回文件指针</li>
-<li>example: <code>FILE* fp = fopen("test.txt", "r");</code></li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/c_standard_library/c_function_fread.htm">fread</a><sup>3</sup>: The C library function size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream) reads data from the given stream into the array pointed to, by ptr.<ul>
-<li>从文件中读取字节</li>
-<li>example: <code>int len = fread(buffer, 1, 5, fp);</code></li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/c_standard_library/c_function_fprintf.htm">fprintf</a><sup>4</sup>: The C library function int fprintf(FILE *stream, const char *format, …) sends formatted output to a stream.<ul>
-<li>格式化输出到流</li>
-<li>examples:<ul>
-<li>格式化输出到标准输出流: <code>fprintf(stdout, "this is standard output!\n")</code>, 相当于 <code>printf</code></li>
-<li>格式化输出到标准错误流: <code>fprintf(stderr, "this is standard error!\n")</code></li>
-</ul>
+<h2 id="首先要了解段错误"><a href="#首先要了解段错误" class="headerlink" title="首先要了解段错误"></a>首先要了解段错误</h2><h3 id="导致段错误的原因"><a href="#导致段错误的原因" class="headerlink" title="导致段错误的原因"></a>导致段错误的原因</h3><ul>
+<li>一般有四种原因<ol>
+<li>访问了非法内存: <code>int* p = NULL; printf("%d\n", *p);</code></li>
+<li>数组越界: <code>int a[4]; a[4] = 1;</code> 数组越界存在不确定因素，有时候会出现段错误，有时候不会</li>
+<li>scanf错误使用: <code>int a; scanf("%d", a);</code></li>
+<li>指针访问只读内存： <code>char* str = "111"; str[0] = 'a';</code></li>
+</ol>
 </li>
 </ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><ul>
+<li><p>编写代码：<code>segment.c</code></p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">int</span>* p = <span class="literal">NULL</span>;</span><br><span class="line">    *p = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 </li>
-<li><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/c_standard_library/c_function_fclose.htm">fclose</a><sup>5</sup>: The C library function int fclose(FILE *stream) closes the stream. All buffers are flushed.<ul>
-<li>关闭文件流</li>
-<li>example: <code>fclose(fp)</code></li>
-</ul>
+<li><p>编译并运行:</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos c]<span class="comment"># gcc -g segment.c</span></span><br><span class="line">[root@VM-16-5-centos c]<span class="comment"># ./a.out</span></span><br><span class="line">Segmentation fault</span><br><span class="line">[root@VM-16-5-centos c]<span class="comment">#</span></span><br></pre></td></tr></tbody></table></figure>
 </li>
-<li><a target="_blank" rel="noopener" href="https://linux.die.net/man/2/access">access</a><sup>6</sup>: access - check real user’s permissions for a file<ul>
-<li>判断是否具有文件操作的权限</li>
-<li>examples:<ul>
-<li>判断文件是否存在: <code>if (access(file_path, F_OK) == 0){}</code></li>
-<li>判断是否可以读取文件: <code>if (access(file_path, R_OK) == 0){}</code></li>
-<li>判断是否可以写入文件: <code>if (access(file_path, W_OK) == 0){}</code></li>
-</ul>
+<li><p>如上所示，执行程序的时候，报段错误，但是没有生成 <code>core</code> 文件，所以需要手动设置一下 <a target="_blank" rel="noopener" href="https://www.linuxcool.com/ulimit">ulimit</a><sup>1</sup> 然后再运行，并查看生成的core文件</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos c]<span class="comment"># ulimit -c unlimited</span></span><br><span class="line">[root@VM-16-5-centos c]<span class="comment"># ./a.out</span></span><br><span class="line">Segmentation fault (core dumped)</span><br><span class="line">[root@VM-16-5-centos c]<span class="comment"># ls</span></span><br><span class="line">a.out  core.26602  error.txt  pipe.c  read_pipe.c  segment.c  simulate_commands  write_pipe.c</span><br></pre></td></tr></tbody></table></figure>
 </li>
-</ul>
+<li><p>如上图所示中的 <code>core.26602</code> 就是生成的段错误文件，接下来我们要进入gdb来分析该 core文件定位导致段错误的位置</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos c]<span class="comment"># gdb a.out core.26602</span></span><br><span class="line">GNU gdb (GDB) Red Hat Enterprise Linux 7.6.1-120.el7</span><br><span class="line">Copyright (C) 2013 Free Software Foundation, Inc.</span><br><span class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law.  Type <span class="string">"show copying"</span></span><br><span class="line">and <span class="string">"show warranty"</span> <span class="keyword">for</span> details.</span><br><span class="line">This GDB was configured as <span class="string">"x86_64-redhat-linux-gnu"</span>.</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/bugs/&gt;...</span><br><span class="line">Reading symbols from /root/files/blend/gitpros/linux/coding/c/a.out...done.</span><br><span class="line">[New LWP 27251]</span><br><span class="line">Core was generated by `./a.out<span class="string">'.</span></span><br><span class="line"><span class="string">Program terminated with signal 11, Segmentation fault.</span></span><br><span class="line"><span class="string">#0  0x00000000004004fd in main () at segment.c:6</span></span><br><span class="line"><span class="string">6		*p = 1;</span></span><br><span class="line"><span class="string">Missing separate debuginfos, use: debuginfo-install glibc-2.17-325.el7_9.x86_64</span></span><br><span class="line"><span class="string">(gdb) </span></span><br></pre></td></tr></tbody></table></figure>
 </li>
-<li><a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man3/getline.3.html">getline</a><sup>7</sup>: reads an entire line from stream,<ul>
-<li>从流中读取一整行</li>
-<li>example: <code>ssize_t read = getline(&amp;buffer, &amp;len, stdin);</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>创建 <code>mycat.c</code></p>
-</li>
-<li><p><code>cat</code> 命令需要接文件参数，引入参数</p>
-  <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span>{<span class="keyword">return</span> <span class="number">0</span>;}</span><br></pre></td></tr></tbody></table></figure></li>
-<li><p>判断参数的个数，如果小于等于1个参数需要按行输出用户的输入</p>
-  <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// take user's input and output it by line</span></span><br><span class="line"><span class="type">char</span>* line;</span><br><span class="line"><span class="type">size_t</span> len = <span class="number">0</span>;</span><br><span class="line"><span class="type">ssize_t</span> read;</span><br><span class="line"><span class="keyword">while</span> ((read = getline(&amp;line, &amp;len, <span class="built_in">stdin</span>) != <span class="number">-1</span>))</span><br><span class="line">{</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s"</span>, line);</span><br><span class="line">}</span><br><span class="line"><span class="keyword">if</span> (line)</span><br><span class="line">{</span><br><span class="line">    <span class="built_in">free</span>(line);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li><p>定义一个专门显示文件内容的函数</p>
-  <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">show_file_content</span><span class="params">(<span class="type">char</span>* file_path)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">if</span> (access(file_path, R_OK) == <span class="number">0</span>)</span><br><span class="line">    {</span><br><span class="line">        FILE* fp = fopen(file_path, <span class="string">"r"</span>);</span><br><span class="line">        <span class="keyword">if</span> (fp)</span><br><span class="line">        {</span><br><span class="line">            <span class="type">char</span> buffer[<span class="number">5</span>];</span><br><span class="line">            <span class="type">int</span> len = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (len = fread(buffer, <span class="number">1</span>, <span class="number">4</span>, fp))</span><br><span class="line">            {</span><br><span class="line">                buffer[len] = <span class="number">0</span>;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%s"</span>, buffer);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">        {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"file open error\n"</span>);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"mycat: 1: No such file or directory\n"</span>);</span><br><span class="line">    }	</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
-<li><p>接下来是main函数的调用:</p>
-  <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">if</span> (argc &gt; <span class="number">1</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; argc; i++)</span><br><span class="line">        {</span><br><span class="line">            show_file_content(argv[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    {</span><br><span class="line">        <span class="comment">// take user's input and output it</span></span><br><span class="line">        <span class="type">char</span>* line;</span><br><span class="line">        <span class="type">size_t</span> len = <span class="number">0</span>;</span><br><span class="line">        <span class="type">ssize_t</span> read;</span><br><span class="line">        <span class="keyword">while</span> ((read = getline(&amp;line, &amp;len, <span class="built_in">stdin</span>) != <span class="number">-1</span>))</span><br><span class="line">        {</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%s"</span>, line);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (line)</span><br><span class="line">        {</span><br><span class="line">            <span class="built_in">free</span>(line);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> EXIT_FAILURE;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li><p>全部代码: <code>mycat.c</code></p>
-  <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">show_file_content</span><span class="params">(<span class="type">char</span>* file_path)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">if</span> (access(file_path, R_OK) == <span class="number">0</span>)</span><br><span class="line">    {</span><br><span class="line">        FILE* fp = fopen(file_path, <span class="string">"r"</span>);</span><br><span class="line">        <span class="keyword">if</span> (fp)</span><br><span class="line">        {</span><br><span class="line">            <span class="type">char</span> buffer[<span class="number">5</span>];</span><br><span class="line">            <span class="type">int</span> len = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (len = fread(buffer, <span class="number">1</span>, <span class="number">4</span>, fp))</span><br><span class="line">            {</span><br><span class="line">                buffer[len] = <span class="number">0</span>;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%s"</span>, buffer);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">        {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"file open error\n"</span>);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"mycat: 1: No such file or directory\n"</span>);</span><br><span class="line">    }	</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">if</span> (argc &gt; <span class="number">1</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; argc; i++)</span><br><span class="line">        {</span><br><span class="line">            show_file_content(argv[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    {</span><br><span class="line">        <span class="comment">// take user's input and output it</span></span><br><span class="line">        <span class="type">char</span>* line;</span><br><span class="line">        <span class="type">size_t</span> len = <span class="number">0</span>;</span><br><span class="line">        <span class="type">ssize_t</span> read;</span><br><span class="line">        <span class="keyword">while</span> ((read = getline(&amp;line, &amp;len, <span class="built_in">stdin</span>) != <span class="number">-1</span>))</span><br><span class="line">        {</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%s"</span>, line);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (line)</span><br><span class="line">        {</span><br><span class="line">            <span class="built_in">free</span>(line);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> EXIT_FAILURE;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
-</ul>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><ul>
-<li>先编译: <code>gcc mycat.c -o mycat</code></li>
-<li>无参数运行: <code>./mycat</code> <code>Ctrl + D</code> 结束输入  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos simulate_commands]# ./mycat</span><br><span class="line">hello</span><br><span class="line">hello</span><br><span class="line">my name is smx</span><br><span class="line">my name is smx</span><br><span class="line">how are you today</span><br><span class="line">how are you today</span><br><span class="line">bye</span><br><span class="line">bye</span><br></pre></td></tr></tbody></table></figure></li>
-<li>带参数运行: <code>./mycat 1.txt 2.txt</code></li>
+<li><p>从以上的gdb信息就可以看到导致段错误的代码位置: </p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Program terminated with signal 11, Segmentation fault.</span><br><span class="line"><span class="comment">#0  0x00000000004004fd in main () at segment.c:6</span></span><br><span class="line">6		*p = 1;</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
-<li><code>[1]</code> <a target="_blank" rel="noopener" href="https://www.linuxcool.com/cat">cat命令详细介绍</a></li>
-<li><code>[2]</code> <a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/c_standard_library/c_function_fopen.htm">fopen c函数</a></li>
-<li><code>[3]</code> <a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/c_standard_library/c_function_fread.htm">fread c函数</a></li>
-<li><code>[4]</code> <a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/c_standard_library/c_function_fprintf.htm">fprintf c函数</a></li>
-<li><code>[5]</code> <a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/c_standard_library/c_function_fclose.htm">fclose c函数</a></li>
-<li><code>[6]</code> <a target="_blank" rel="noopener" href="https://linux.die.net/man/2/access">access c函数</a></li>
-<li><code>[7]</code> <a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man3/getline.3.html">getline c函数</a></li>
+<li><code>[1]</code> <a target="_blank" rel="noopener" href="https://www.linuxcool.com/ulimit">ulimit</a></li>
 </ul>
 <h2 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h2><ul>
-<li>c函数<ul>
-<li><code>fopen</code>、<code>fread</code>、<code>fprintf</code>、<code>fclose</code>、<code>access</code>、 <code>getline</code></li>
-</ul>
-</li>
+<li><code>ulimit</code></li>
+<li><code>gdb a.out core</code></li>
+<li><code>gcc -g segment.c</code></li>
 </ul>
 
                 
@@ -571,7 +527,7 @@ cat1: 在终端设备上显示文件内容">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://baby-jie.github.io/2022/05/27/%E5%AE%9E%E7%8E%B0linux%E7%9A%84cat%E5%91%BD%E4%BB%A4/">http://baby-jie.github.io/2022/05/27/%E5%AE%9E%E7%8E%B0linux%E7%9A%84cat%E5%91%BD%E4%BB%A4/</a>
+                    <a href="http://baby-jie.github.io/2022/05/28/c%E7%A8%8B%E5%BA%8F%E5%AE%9A%E4%BD%8D%E6%AE%B5%E9%94%99%E8%AF%AFsegment-fault/">http://baby-jie.github.io/2022/05/28/c%E7%A8%8B%E5%BA%8F%E5%AE%9A%E4%BD%8D%E6%AE%B5%E9%94%99%E8%AF%AFsegment-fault/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -615,6 +571,10 @@ cat1: 在终端设备上显示文件内容">
                             
                                 <a href="/tags/linux/">
                                     <span class="chip bg-color">linux</span>
+                                </a>
+                            
+                                <a href="/tags/gdb/">
+                                    <span class="chip bg-color">gdb</span>
                                 </a>
                             
                         </div>
@@ -662,9 +622,10 @@ cat1: 在终端设备上显示文件内容">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/05/28/c%E7%A8%8B%E5%BA%8F%E5%AE%9A%E4%BD%8D%E6%AE%B5%E9%94%99%E8%AF%AFsegment-fault/">
                     <div class="card-image">
@@ -682,9 +643,9 @@ cat1: 在终端设备上显示文件内容">
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -697,6 +658,7 @@ cat1: 在终端设备上显示文件内容">
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -720,7 +682,7 @@ cat1: 在终端设备上显示文件内容">
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2022/05/27/%E5%AE%9E%E7%8E%B0linux%E7%9A%84cat%E5%91%BD%E4%BB%A4/">
@@ -754,7 +716,6 @@ cat1: 在终端设备上显示文件内容">
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
