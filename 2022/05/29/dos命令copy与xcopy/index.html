@@ -411,12 +411,29 @@ windows管理器中 Ctrl+C 然后 Ctrl+V 就行了，为什么还要学这两个
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/dos/">
+                                <span class="chip bg-color">dos</span>
+                            </a>
+                        
+                            <a href="/tags/commands/">
+                                <span class="chip bg-color">commands</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/dos/" class="post-category">
+                                dos
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -515,9 +532,13 @@ windows管理器中 Ctrl+C 然后 Ctrl+V 就行了，为什么还要学这两个
 <li><p>将文件 <code>file1</code> 复制到 <code>fodler1</code> 目录下，<code>folder1 </code>目录不存在: </p>
 <figure class="highlight dos"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">F:\<span class="title">files</span>\<span class="title">blend</span>\<span class="title">test</span>&gt;<span class="title">xcopy</span> <span class="title">file1</span> <span class="title">folder1</span></span></span><br><span class="line"><span class="function">目标 <span class="title">folder1</span> 是文件名</span></span><br><span class="line"><span class="function">还是目录名</span></span><br><span class="line"><span class="function">(<span class="title">F</span> = 文件，<span class="title">D</span> = 目录)? <span class="title">D</span></span></span><br><span class="line"><span class="function"><span class="title">F:file1</span></span></span><br><span class="line"><span class="function">复制了 1 个文件</span></span><br></pre></td></tr></tbody></table></figure>
 </li>
-<li><p>将 目录<code>folder1</code> 复制为 <code>folder2</code>目录 <code>folder2</code>目录不存在: <code>xcopy /i folder1 folder2 </code></p>
+<li><p>将目录 <code>folder1</code> 复制为 <code>folder2</code>目录 <code>folder2</code>目录不存在: <code>xcopy /i folder1 folder2 </code></p>
 </li>
-<li><p>将 目录<code>folder1</code> 复制为 <code>folder2</code>目录 <code>folder2</code>目录存在: <code>xcopy /y folder1 folder2 </code></p>
+<li><p>将目录 <code>folder1</code> 复制为 <code>folder2</code>目录 <code>folder2</code>目录存在: <code>xcopy /y folder1 folder2 </code></p>
+</li>
+<li><p>将目录 <code>folder1</code> 复制到 <code>folder2</code> 目录下并命名为 <code>test</code> 目录 : <code>xcopy /i folder1 "folder2/test"</code></p>
+</li>
+<li><p>将目录 <code>folder1</code> 所有内容复制到 <code>folder2/test</code>目录下， <code>folder2/test</code> 目录存在: ``xcopy /y /q folder1 “folder2/test”`</p>
 </li>
 </ul>
 </li>
@@ -591,7 +612,15 @@ windows管理器中 Ctrl+C 然后 Ctrl+V 就行了，为什么还要学这两个
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/dos/">
+                                    <span class="chip bg-color">dos</span>
+                                </a>
+                            
+                                <a href="/tags/commands/">
+                                    <span class="chip bg-color">commands</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -663,13 +692,29 @@ windows管理器中 Ctrl+C 然后 Ctrl+V 就行了，为什么还要学这两个
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            MingXing Sun
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/dos/" class="post-category">
+                                    dos
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/dos/">
+                        <span class="chip bg-color">dos</span>
+                    </a>
+                    
+                    <a href="/tags/commands/">
+                        <span class="chip bg-color">commands</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
