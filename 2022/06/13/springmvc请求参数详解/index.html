@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="星火燎原" />
+  <meta name="author" content="MingXing Sun" />
+  <meta name="description" content="星星之火，可以燎原" />
+  
+  
+  <title>
+    
+      springmvc请求参数详解 
+      
+      
+      |
+    
+     星火燎原
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/ace.jpg">
+    <link rel="icon" href="/images/ace.jpg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/color-scheme.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/comments.css">
+
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/ace.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Ace</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">springmvc请求参数详解</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2022-06-13 08:02:34
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/SpringMVC/" title="SpringMVC">
+                    <b>#</b> SpringMVC
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/http/" title="http">
+                    <b>#</b> http
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/RequestBody/" title="RequestBody">
+                    <b>#</b> RequestBody
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="Spring-MVC-请求参数详解"><a href="#Spring-MVC-请求参数详解" class="headerlink" title="Spring MVC 请求参数详解"></a>Spring MVC 请求参数详解</h1><ul>
+<li>Http请求参数分为两种<ol>
+<li>url拼接参数</li>
+<li>请求体参数</li>
+</ol>
+</li>
+</ul>
+<h2 id="code-准备"><a href="#code-准备" class="headerlink" title="code 准备"></a>code 准备</h2><ul>
+<li><p><code>User.java</code></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span>{</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">    <span class="keyword">private</span> String sex;</span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h2 id="获取请求参数的五种方式"><a href="#获取请求参数的五种方式" class="headerlink" title="获取请求参数的五种方式"></a>获取请求参数的五种方式</h2><h3 id="SevletApi方式获取请求参数"><a href="#SevletApi方式获取请求参数" class="headerlink" title="SevletApi方式获取请求参数"></a>SevletApi方式获取请求参数</h3><ul>
+<li><p>在请求方法种添加 <code>HttpServletRequest</code> 类型参数，并通过调用 <code>requestParam</code> 获取参数，此方法比较原始.</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping("/user01")</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> User <span class="title function_">servletApi</span><span class="params">(HttpServletRequest request)</span> {</span><br><span class="line">    <span class="type">String</span> <span class="variable">userName</span> <span class="operator">=</span> request.getParameter(<span class="string">"userName"</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">sex</span> <span class="operator">=</span> request.getParameter(<span class="string">"sex"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">    user.setUserName(userName);</span><br><span class="line">    user.setSex(sex);</span><br><span class="line">    user.setDescription(<span class="string">"servletApi in ParameterGetController"</span>);</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><ul>
+<li><p><code>Get/Post/Put http://localhost:9000/user01</code> body: none</p>
+<ul>
+<li><p>reponse:</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"userName"</span><span class="punctuation">:</span> <span class="keyword">null</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sex"</span><span class="punctuation">:</span> <span class="keyword">null</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"description"</span><span class="punctuation">:</span> <span class="string">"servletApi in ParameterGetController"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>因为没有带拼接url参数，所以通过 <code>request.getParam(key)</code> 获取到的值都为null</p>
+</li>
+</ul>
+</li>
+<li><p><code>Get/Post/Put http://localhost:9000/user01?userName=smx&amp;sex=male</code> body:none</p>
+<ul>
+<li><p>response:</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"userName"</span><span class="punctuation">:</span> <span class="string">"smx"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sex"</span><span class="punctuation">:</span> <span class="string">"male"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"description"</span><span class="punctuation">:</span> <span class="string">"servletApi in ParameterGetController"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>因为带了拼接url参数，所以通过 <code>request.getParam(key)</code> 可以获取到对应的值</p>
+</li>
+</ul>
+</li>
+<li><p>带有body的请求，因为该方法只用了 <code>request.getParam(key)</code> 只能获取拼接url参数，所以这里就举例带有body的请求了。</p>
+</li>
+</ul>
+<h3 id="方法同名参数接收请求参数"><a href="#方法同名参数接收请求参数" class="headerlink" title="方法同名参数接收请求参数"></a>方法同名参数接收请求参数</h3><ul>
+<li><p>在请求方法中，使用和请求参数同名的参数:</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping("/user02")</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> User <span class="title function_">funParam</span><span class="params">(String userName, String sex)</span> {</span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">    user.setUserName(userName);</span><br><span class="line">    user.setSex(sex);</span><br><span class="line">    user.setDescription(<span class="string">"funParam in ParameterGetController"</span>);</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h4 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h4><ul>
+<li><p><code>Get/Post/Put http://localhost:9000/user02</code> body:none</p>
+<ul>
+<li><p>response: </p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"userName"</span><span class="punctuation">:</span> <span class="keyword">null</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sex"</span><span class="punctuation">:</span> <span class="keyword">null</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"description"</span><span class="punctuation">:</span> <span class="string">"funParam in ParameterGetController"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>因为请求既没有拼接参数，也没有body，自然接收到的参数为null</p>
+</li>
+</ul>
+</li>
+<li><p><code>Get/Post/Put http://localhost:9000/user02?userName=smx&amp;sex=male</code> body: none</p>
+<ul>
+<li><p>response:</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"userName"</span><span class="punctuation">:</span> <span class="string">"smx"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sex"</span><span class="punctuation">:</span> <span class="string">"male"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"description"</span><span class="punctuation">:</span> <span class="string">"funParam in ParameterGetController"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>该方法可以接收拼接参数</p>
+</li>
+</ul>
+</li>
+<li><p><code>Post/Put http://localhost:9000/user02</code> <code>Content-Type: application/x-www-form-urlencoded</code></p>
+<ul>
+<li><p>body:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">userName:smx_urlencoded</span><br><span class="line">sex:male_urlencoded</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>response:</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"userName"</span><span class="punctuation">:</span> <span class="string">"smx_urlencoded"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sex"</span><span class="punctuation">:</span> <span class="string">"male_urlencoded"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"description"</span><span class="punctuation">:</span> <span class="string">"funParam in ParameterGetController"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>可见，该方法不仅能接收拼接参数，而且还能接收 <code>body</code> 参数 (post or put method, get方法不能接收body参数)</p>
+</li>
+</ul>
+</li>
+<li><p>那么请求既带拼接参数，又带body参数又该怎么样呢？请求 <code>POST http://localhost:9000/user02?userName=smx&amp;sex=male</code></p>
+<ul>
+<li><p><code>Content-Type: application/x-www-form-urlencoded</code></p>
+</li>
+<li><p>body:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">userName:smx_urlencoded</span><br><span class="line">sex:male_urlencoded</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>response:</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"userName"</span><span class="punctuation">:</span> <span class="string">"smx,smx_urlencoded"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sex"</span><span class="punctuation">:</span> <span class="string">"male,male_urlencoded"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"description"</span><span class="punctuation">:</span> <span class="string">"funParam in ParameterGetController"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>从以上的response可以看到，拼接参数和body参数同名参数自动拼接成一个字符串</p>
+</li>
+<li><p>那么，如果拼接参数和body参数同名且值相同会怎么样？</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"userName"</span><span class="punctuation">:</span> <span class="string">"smx,smx"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sex"</span><span class="punctuation">:</span> <span class="string">"male,male"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"description"</span><span class="punctuation">:</span> <span class="string">"funParam in ParameterGetController"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="使用-RequestParam指定参数名"><a href="#使用-RequestParam指定参数名" class="headerlink" title="使用 @RequestParam指定参数名"></a>使用 @RequestParam指定参数名</h2><ul>
+<li><p>在请求方法中，使用 <code>@RequestParam</code>  指定参数的名字</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping("/user03")</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> User <span class="title function_">funNamedParam</span><span class="params">(<span class="meta">@RequestParam("userName")</span> String name, <span class="meta">@RequestParam("sex")</span> String gender)</span> {</span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">    user.setUserName(name);</span><br><span class="line">    user.setSex(gender);</span><br><span class="line">    user.setDescription(<span class="string">"funNamedParam in ParameterGetController"</span>);</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>有一点需要注意：<code>RequestParam</code> 中的 <code>required</code> 默认为true，也就是说，一旦被 <code>@RequestParam</code> 标记的参数一定要提供，否咋报错，当然你也可以手动将 <code>required</code>  设置为 <code>false</code> : <code>@RequestParam(value="userName", required=false) String name</code></p>
+</li>
+</ul>
+<h3 id="测试-2"><a href="#测试-2" class="headerlink" title="测试"></a>测试</h3><ul>
+<li>和 <strong>方法同名参数接收请求参数</strong> 测试一致</li>
+</ul>
+<h2 id="使用Bean对象接收参数"><a href="#使用Bean对象接收参数" class="headerlink" title="使用Bean对象接收参数"></a>使用Bean对象接收参数</h2><ul>
+<li><p>在请求方法中，直接使用bean对象去接收请求的参数</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping("/user04")</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> User <span class="title function_">beanParam</span><span class="params">(User user)</span> {</span><br><span class="line">    user.setDescription(<span class="string">"beanParam in ParameterGetController"</span>);</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="测试-3"><a href="#测试-3" class="headerlink" title="测试"></a>测试</h3><ul>
+<li>与以上测试一致</li>
+</ul>
+<h2 id="使用-RequestBody-来接收-json数据"><a href="#使用-RequestBody-来接收-json数据" class="headerlink" title="使用 @RequestBody 来接收 json数据"></a>使用 @RequestBody 来接收 json数据</h2><ul>
+<li><p>在请求方法中，直接使用bean对象并且使用 @RequestBody来标记，接收body的json数据</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping("/user05")</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> User <span class="title function_">jsonRequestBody</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span> {</span><br><span class="line">    user.setDescription(<span class="string">"jsonRequestBody in ParameterGetController"</span>);</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><code>@RequestBody</code>: 主要用来接收前端传递给后端的json字符串种的数据</p>
+<ul>
+<li>一个请求，只有一个RequestBody, 可以有多个 RequestParam</li>
+</ul>
+</li>
+<li><p><code>@RequestBody</code> 只能接收 <code>Content-Type</code> 为 <code>application/json</code> 的请求（body为json)，不会接收 url拼接参数</p>
+</li>
+</ul>
+<h3 id="测试-4"><a href="#测试-4" class="headerlink" title="测试"></a>测试</h3><ul>
+<li><p><code>Get/Post/Put http://localhost:9000/user05</code> <code>Content-Type: application/json</code></p>
+<ul>
+<li><p>body:</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"userName"</span><span class="punctuation">:</span> <span class="string">"smx_json"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sex"</span><span class="punctuation">:</span> <span class="string">"male_json"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>response:</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"userName"</span><span class="punctuation">:</span> <span class="string">"smx_json"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sex"</span><span class="punctuation">:</span> <span class="string">"male_json"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"description"</span><span class="punctuation">:</span> <span class="string">"jsonRequestBody in ParameterGetController"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="请求体内容"><a href="#请求体内容" class="headerlink" title="请求体内容"></a>请求体内容</h2><ul>
+<li><p>首先我们要在Headers中添加一个 key，为 <code>Content-Type</code>, 表明我们请求体(body)的内容类型 接下来我们仔细研究一下这个 <code>Content-Type</code></p>
+</li>
+<li><p><code>Content-Type</code></p>
+<ul>
+<li><p><code>application/json</code>: 表明 <code>body</code> 内容就是json字符串</p>
+</li>
+<li><p><code>application/x-www-form-urlencoded</code>: 表单提交就是以这种方式，body内容为key value值的拼接，例如: <code>userName=smx&amp;sex=male</code></p>
+</li>
+<li><p><code>multipart/form-data</code></p>
+<ul>
+<li><p><code>Content-Type</code> 中不仅要设置为 <code>multipart/form-data</code> 还要设置自定义边界</p>
+<ul>
+<li><p>例如: <code>Content-Type: multipart/form-data; boundary=--smx</code></p>
+</li>
+<li><p>那么 body 就应该设置为</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">----smx</span><br><span class="line">Content-Disposition: form-data; name="userName"</span><br><span class="line"></span><br><span class="line">smx</span><br><span class="line">----smx</span><br><span class="line">Content-Disposition: form-data; name="sex"</span><br><span class="line"></span><br><span class="line">male</span><br><span class="line">----smx--</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+</li>
+<li><p>html中利用form来提交 <code>form-data</code> 数据</p>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span> <span class="attr">action</span>=<span class="string">"http://localhost:9000/user04"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span>&gt;</span>用户名:<span class="tag">&lt;/<span class="name">label</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"userName"</span> <span class="attr">value</span>=<span class="string">"smx"</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span>&gt;</span>性别:<span class="tag">&lt;/<span class="name">label</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"sex"</span> <span class="attr">value</span>=<span class="string">"male"</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>查看请求源码</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryvGgpig5EBnllnkJb</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundaryvGgpig5EBnllnkJb</span><br><span class="line">Content-Disposition: form-data; name="userName"</span><br><span class="line"></span><br><span class="line">smx</span><br><span class="line">------WebKitFormBoundaryvGgpig5EBnllnkJb</span><br><span class="line">Content-Disposition: form-data; name="sex"</span><br><span class="line"></span><br><span class="line">male</span><br><span class="line">------WebKitFormBoundaryvGgpig5EBnllnkJb--</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th align="center">参数请求方式</th>
+<th align="center">servlet api方式获取参数</th>
+<th align="center">同名参数获取方式</th>
+<th align="center">指定参数名称获取方式</th>
+<th align="center">bean对象方式</th>
+<th align="center">@RequestBody方式</th>
+<th align="center">get请求</th>
+<th align="center">post请求</th>
+<th align="center">put请求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">url拼接参数</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">form-data</td>
+<td align="center">×</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">x-www-form-urlencoded</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">application/json</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+</tbody></table>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/06/08/linux%E5%91%BD%E4%BB%A4tar%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2022-06-13 08:02:34
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/SpringMVC/" title="SpringMVC">
+                        <b>#</b> SpringMVC
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/http/" title="http">
+                        <b>#</b> http
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/RequestBody/" title="RequestBody">
+                        <b>#</b> RequestBody
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2022/06/14/linux%E7%A8%8B%E5%BA%8F%E4%BB%A5%E5%90%8E%E5%8F%B0%E6%96%B9%E5%BC%8F%E5%90%AF%E5%8A%A8/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-MVC-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-text">Spring MVC 请求参数详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#code-%E5%87%86%E5%A4%87"><span class="toc-text">code 准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E7%9A%84%E4%BA%94%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">获取请求参数的五种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SevletApi%E6%96%B9%E5%BC%8F%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="toc-text">SevletApi方式获取请求参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%90%8C%E5%90%8D%E5%8F%82%E6%95%B0%E6%8E%A5%E6%94%B6%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="toc-text">方法同名参数接收请求参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-1"><span class="toc-text">测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-RequestParam%E6%8C%87%E5%AE%9A%E5%8F%82%E6%95%B0%E5%90%8D"><span class="toc-text">使用 @RequestParam指定参数名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-2"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Bean%E5%AF%B9%E8%B1%A1%E6%8E%A5%E6%94%B6%E5%8F%82%E6%95%B0"><span class="toc-text">使用Bean对象接收参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-3"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-RequestBody-%E6%9D%A5%E6%8E%A5%E6%94%B6-json%E6%95%B0%E6%8D%AE"><span class="toc-text">使用 @RequestBody 来接收 json数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-4"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E4%BD%93%E5%86%85%E5%AE%B9"><span class="toc-text">请求体内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/baby-jie">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2022 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + springmvc%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3 + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F13%2Fspringmvc%25E8%25AF%25B7%25E6%25B1%2582%25E5%258F%2582%25E6%2595%25B0%25E8%25AF%25A6%25E8%25A7%25A3%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/13/springmvc%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>
