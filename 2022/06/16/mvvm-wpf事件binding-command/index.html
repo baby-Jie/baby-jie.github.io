@@ -11,7 +11,7 @@
   
   <title>
     
-      标签 
+      mvvm:wpf事件binding command 
       
       
       |
@@ -146,21 +146,190 @@
 
 
 
-  <!-- 标签页 url形式：https://yoursite/tags/ -->
-  <div class="container tag-index">
-    <div>
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequestBody/" rel="tag">RequestBody</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apt/" rel="tag">apt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/binding/" rel="tag">binding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/commands/" rel="tag">commands</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dos/" rel="tag">dos</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/" rel="tag">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mvvm/" rel="tag">mvvm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/software/" rel="tag">software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wpf/" rel="tag">wpf</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%9B%E5%AE%A2/" rel="tag">牛客</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag">链表</a><span class="tag-list-count">2</span></li></ul>
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">mvvm:wpf事件binding command</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2022-06-16 17:29:06
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/wpf/" title="wpf">
+                    <b>#</b> wpf
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/wpf/" title="wpf">
+                    <b>#</b> wpf
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/mvvm/" title="mvvm">
+                    <b>#</b> mvvm
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/binding/" title="binding">
+                    <b>#</b> binding
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="MVVM-WPF事件Binding-Command"><a href="#MVVM-WPF事件Binding-Command" class="headerlink" title="MVVM:WPF事件Binding Command"></a>MVVM:WPF事件Binding Command</h1><ul>
+<li><p>我们知道 <code>Button</code> 控件有 <code>Command</code> 依赖属性，可以用来绑定我们定义在 <code>ViewModel</code> 中的 <code>RelayCommand</code>，当 <code>Button</code> 被点击的时候就会自动执行 我们定义的<code>RelayCommand</code></p>
+</li>
+<li><p>但是其他控件比如 <code>Label</code> 这些没有 <code>Command</code> 依赖属性的怎么绑定 <code>RelayCommand</code>，比如 <code>Label</code>的左击事件怎么绑定 <code>RelayCommand</code>。</p>
+</li>
+<li><p>这个时候就要用到 <code>EventTrigger</code> and <code>InvokeCommandAction</code></p>
+<ul>
+<li>以前我们需要找到 <code>System.Windows.Interactivity.dll</code> 引入我们的项目</li>
+<li>现在微软退出了新的nuget包，我们以新的nuget包示例</li>
+</ul>
+</li>
+<li><p>引入 nuget 包： <code>Microsoft.Xaml.Behaviors.Wpf</code></p>
+</li>
+<li><p>xaml代码:</p>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Window</span> <span class="attr">x:Class</span>=<span class="string">"CommandBindingEvent.MainWindow"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns</span>=<span class="string">"http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:x</span>=<span class="string">"http://schemas.microsoft.com/winfx/2006/xaml"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:behaviors</span>=<span class="string">"http://schemas.microsoft.com/xaml/behaviors"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Grid</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Label</span> <span class="attr">Content</span>=<span class="string">"Hello WPF!"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">behaviors:Interaction.Triggers</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">behaviors:EventTrigger</span> <span class="attr">EventName</span>=<span class="string">"MouseLeftButtonDown"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">behaviors:InvokeCommandAction</span> <span class="attr">Command</span>=<span class="string">"{Binding HelloCmd}"</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">behaviors:EventTrigger</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">behaviors:Interaction.Triggers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Grid</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Window</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>ViewModel代码:</p>
+<figure class="highlight c#"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> RelayArgCommand _helloCmd;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> RelayArgCommand HelloCmd</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">get</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> _helloCmd ?? (_helloCmd = <span class="keyword">new</span> RelayArgCommand((e) =&gt;</span><br><span class="line">                                                             {</span><br><span class="line">                                                                 MessageBox.Show(<span class="string">"hello wpf!"</span>);</span><br><span class="line">                                                             }));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>但是，经过断点调试，我们发现 <code>Command</code> 中的 <code>e</code> 为null，事件一般有两个参数: <code>private void XXX_OnXX(object sender, RoutedEventArgs e)</code>，我们想要通过这两个参数进行其他操作怎么办？</p>
+<ul>
+<li><p><img src="/..%5Cimages%5Cmvvmwpf%E4%BA%8B%E4%BB%B6binding_command%5C1.jpg" alt="image"></p>
+</li>
+<li><p><code>InvokeCommandAction</code> 中需要设置一个参数即可，<code>sender</code> 可通过 <code>e.Source</code> 获得</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;behaviors:InvokeCommandAction Command="{Binding HelloCmd}" PassEventArgsToCommand="True" /&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><img src="/..%5Cimages%5Cmvvmwpf%E4%BA%8B%E4%BB%B6binding_command%5C2.jpg" alt="image2"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/baby-Jie/blog_codes/tree/main/dotnet/wpf/CommandBindingEvent">code</a></li>
+<li><a target="_blank" rel="noopener" href="https://devblogs.microsoft.com/dotnet/open-sourcing-xaml-behaviors-for-wpf/">behaviors</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.nuget.org/packages/Microsoft.Xaml.Behaviors.Wpf/">nuget</a></li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/06/15/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2022-06-16 17:29:06
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/wpf/" title="wpf">
+                        <b>#</b> wpf
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/wpf/" title="wpf">
+                        <b>#</b> wpf
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/mvvm/" title="mvvm">
+                        <b>#</b> mvvm
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/binding/" title="binding">
+                        <b>#</b> binding
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MVVM-WPF%E4%BA%8B%E4%BB%B6Binding-Command"><span class="toc-text">MVVM:WPF事件Binding Command</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
+      
     </div>
   </div>
-  
 
   
+<script src="/js/catalog.js"></script>
 
-  
 
-  
 
-  
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
 
         
 <div class="footer">
@@ -421,12 +590,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + tags + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2Ftags%2Findex.html + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + mvvm%3Awpf%E4%BA%8B%E4%BB%B6binding%20command + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F16%2Fmvvm-wpf%25E4%25BA%258B%25E4%25BB%25B6binding-command%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/tags/index.html" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/16/mvvm-wpf%E4%BA%8B%E4%BB%B6binding-command/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         

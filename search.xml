@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>mvvm:wpf事件binding command</title>
+      <link href="/2022/06/16/mvvm-wpf%E4%BA%8B%E4%BB%B6binding-command/"/>
+      <url>/2022/06/16/mvvm-wpf%E4%BA%8B%E4%BB%B6binding-command/</url>
+      
+        <content type="html"><![CDATA[<h1 id="MVVM-WPF事件Binding-Command"><a href="#MVVM-WPF事件Binding-Command" class="headerlink" title="MVVM:WPF事件Binding Command"></a>MVVM:WPF事件Binding Command</h1><ul><li><p>我们知道 <code>Button</code> 控件有 <code>Command</code> 依赖属性，可以用来绑定我们定义在 <code>ViewModel</code> 中的 <code>RelayCommand</code>，当 <code>Button</code> 被点击的时候就会自动执行 我们定义的<code>RelayCommand</code></p></li><li><p>但是其他控件比如 <code>Label</code> 这些没有 <code>Command</code> 依赖属性的怎么绑定 <code>RelayCommand</code>，比如 <code>Label</code>的左击事件怎么绑定 <code>RelayCommand</code>。</p></li><li><p>这个时候就要用到 <code>EventTrigger</code> and <code>InvokeCommandAction</code></p><ul><li>以前我们需要找到 <code>System.Windows.Interactivity.dll</code> 引入我们的项目</li><li>现在微软退出了新的nuget包，我们以新的nuget包示例</li></ul></li><li><p>引入 nuget 包： <code>Microsoft.Xaml.Behaviors.Wpf</code></p></li><li><p>xaml代码:</p><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Window</span> <span class="attr">x:Class</span>=<span class="string">"CommandBindingEvent.MainWindow"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns</span>=<span class="string">"http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:x</span>=<span class="string">"http://schemas.microsoft.com/winfx/2006/xaml"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:behaviors</span>=<span class="string">"http://schemas.microsoft.com/xaml/behaviors"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Grid</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Label</span> <span class="attr">Content</span>=<span class="string">"Hello WPF!"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">behaviors:Interaction.Triggers</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">behaviors:EventTrigger</span> <span class="attr">EventName</span>=<span class="string">"MouseLeftButtonDown"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">behaviors:InvokeCommandAction</span> <span class="attr">Command</span>=<span class="string">"{Binding HelloCmd}"</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">behaviors:EventTrigger</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">behaviors:Interaction.Triggers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Grid</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Window</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure></li><li><p>ViewModel代码:</p><figure class="highlight c#"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> RelayArgCommand _helloCmd;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> RelayArgCommand HelloCmd</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">get</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> _helloCmd ?? (_helloCmd = <span class="keyword">new</span> RelayArgCommand((e) =&gt;</span><br><span class="line">                                                             {</span><br><span class="line">                                                                 MessageBox.Show(<span class="string">"hello wpf!"</span>);</span><br><span class="line">                                                             }));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li><li><p>但是，经过断点调试，我们发现 <code>Command</code> 中的 <code>e</code> 为null，事件一般有两个参数: <code>private void XXX_OnXX(object sender, RoutedEventArgs e)</code>，我们想要通过这两个参数进行其他操作怎么办？</p><ul><li><p><img src="/..%5Cimages%5Cmvvmwpf%E4%BA%8B%E4%BB%B6binding_command%5C1.jpg" alt="image"></p></li><li><p><code>InvokeCommandAction</code> 中需要设置一个参数即可，<code>sender</code> 可通过 <code>e.Source</code> 获得</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;behaviors:InvokeCommandAction Command="{Binding HelloCmd}" PassEventArgsToCommand="True" /&gt;</span><br></pre></td></tr></tbody></table></figure><ul><li><img src="/..%5Cimages%5Cmvvmwpf%E4%BA%8B%E4%BB%B6binding_command%5C2.jpg" alt="image2"></li></ul></li></ul></li></ul><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul><li><a href="https://github.com/baby-Jie/blog_codes/tree/main/dotnet/wpf/CommandBindingEvent">code</a></li><li><a href="https://devblogs.microsoft.com/dotnet/open-sourcing-xaml-behaviors-for-wpf/">behaviors</a></li><li><a href="https://www.nuget.org/packages/Microsoft.Xaml.Behaviors.Wpf/">nuget</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> wpf </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> wpf </tag>
+            
+            <tag> mvvm </tag>
+            
+            <tag> binding </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>快速打开环境变量面板</title>
       <link href="/2022/06/15/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/"/>
       <url>/2022/06/15/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/</url>
