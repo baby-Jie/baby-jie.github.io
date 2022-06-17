@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>windows和linux中文本文件中的换行</title>
+      <link href="/2022/06/17/windows%E5%92%8Clinux%E4%B8%AD%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%8D%A2%E8%A1%8C/"/>
+      <url>/2022/06/17/windows%E5%92%8Clinux%E4%B8%AD%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%8D%A2%E8%A1%8C/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux sed命令，强大的文本处理命令</title>
       <link href="/2022/06/16/linux-sed%E5%91%BD%E4%BB%A4%EF%BC%8C%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/"/>
       <url>/2022/06/16/linux-sed%E5%91%BD%E4%BB%A4%EF%BC%8C%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/</url>
@@ -64,7 +77,7 @@
       <link href="/2022/06/15/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/"/>
       <url>/2022/06/15/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/</url>
       
-        <content type="html"><![CDATA[<h1 id="快速打开环境变量面板"><a href="#快速打开环境变量面板" class="headerlink" title="快速打开环境变量面板"></a>快速打开环境变量面板</h1><ul><li><p>如果想要添加一个环境变量你会怎么做？</p><ul><li>使用命令行 <code>setx JAVA_HOME d:\\libs\\jdk</code><ul><li>单纯的加环境变量还好，但是如果往 <code>PATH</code> 中添加路径有两个致命的缺点<ol><li>命令没写好，导致PATH路径被覆盖</li><li>PATH长度大于1024，不可写入</li></ol></li></ul></li><li>使用图形化界面<ul><li>打开设置 -&gt; 找到关于 -&gt; 点击高级系统设置 -&gt; 选择高级tab -&gt; 点击环境变量</li><li><img src="/../images%5C%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF%5C%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BFui.jpg" alt="image"></li></ul></li></ul></li><li><p>可以看出以上两种方式都不太便捷，那么，有没有比较快捷的方法呢？有，你可以执行以下命令(运行处<kbd>Win</kbd>+<kbd>r</kbd>):</p><ul><li><code>rundll32 sysdm.cpl,EditEnvironmentVariables</code></li><li><img src="/../images%5C%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF%5C%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4.jpg" alt="image"></li></ul></li><li><p>但是这么长的命令，又难记，又费时间怎么办？写一个脚本执行即可 <code>env.bat</code></p><figure class="highlight bat"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">start</span> /b rundll32 sysdm.cpl,EditEnvironmentVariables</span><br></pre></td></tr></tbody></table></figure></li><li><p>然后将这个脚本创建一个快捷方式，名字就命名为 <code>env</code>, 随后将这个快捷方式放到，环境变量PATH路径中</p><ul><li><img src="/../images%5C%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF%5Cenv.jpg" alt="env"></li><li><img src="/../images/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/env2.jpg" alt="env"></li></ul></li><li><p>接下来我们只要在 运行处 键入: <code>env</code> 命令就可快速打开变量面板了</p><ul><li><img src="/../images/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/env3.jpg" alt="env"></li></ul></li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="快速打开环境变量面板"><a href="#快速打开环境变量面板" class="headerlink" title="快速打开环境变量面板"></a>快速打开环境变量面板</h1><ul><li><p>如果想要添加一个环境变量你会怎么做？</p><ul><li>使用命令行 <code>setx JAVA_HOME d:\\libs\\jdk</code><ul><li>单纯的加环境变量还好，但是如果往 <code>PATH</code> 中添加路径有两个致命的缺点<ol><li>命令没写好，导致PATH路径被覆盖</li><li>PATH长度大于1024，不可写入</li></ol></li></ul></li><li>使用图形化界面<ul><li>打开设置 -&gt; 找到关于 -&gt; 点击高级系统设置 -&gt; 选择高级tab -&gt; 点击环境变量</li><li><img src="/../images/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BFui.jpg" alt="image"></li></ul></li></ul></li><li><p>可以看出以上两种方式都不太便捷，那么，有没有比较快捷的方法呢？有，你可以执行以下命令(运行处<kbd>Win</kbd>+<kbd>r</kbd>):</p><ul><li><code>rundll32 sysdm.cpl,EditEnvironmentVariables</code></li><li><img src="/../images/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4.jpg" alt="image"></li></ul></li><li><p>但是这么长的命令，又难记，又费时间怎么办？写一个脚本执行即可 <code>env.bat</code></p><figure class="highlight bat"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">start</span> /b rundll32 sysdm.cpl,EditEnvironmentVariables</span><br></pre></td></tr></tbody></table></figure></li><li><p>然后将这个脚本创建一个快捷方式，名字就命名为 <code>env</code>, 随后将这个快捷方式放到，环境变量PATH路径中</p><ul><li><img src="/../images/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/env.jpg" alt="env"></li><li><img src="/../images/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/env2.jpg" alt="env"></li></ul></li><li><p>接下来我们只要在 运行处 键入: <code>env</code> 命令就可快速打开变量面板了</p><ul><li><img src="/../images/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/env3.jpg" alt="env"></li></ul></li></ul>]]></content>
       
       
       <categories>
