@@ -11,7 +11,7 @@
   
   <title>
     
-      windows和linux中文本文件中的换行 
+      dos命令del与rd 
       
       
       |
@@ -157,22 +157,85 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">windows和linux中文本文件中的换行</div>
+      <div class="post-title">dos命令del与rd</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="更新时间"></i>
-          2022-06-17 19:09:13
+          2022-06-18 10:04:04
         </span>
         
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/dos/" title="dos">
+                    <b>#</b> dos
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/dos/" title="dos">
+                    <b>#</b> dos
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/commands/" title="commands">
+                    <b>#</b> commands
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
       <div class="markdown-body">
-        
+        <h1 id="dos命令del与rd"><a href="#dos命令del与rd" class="headerlink" title="dos命令del与rd"></a>dos命令del与rd</h1><h2 id="del命令"><a href="#del命令" class="headerlink" title="del命令"></a>del命令</h2><ul>
+<li>del: 删除文件</li>
+<li>options:<ul>
+<li><code>/q</code>: 安静模式，删除全局通配符时，不要求确认</li>
+<li><code>/s</code>: 递归删除子目录中的文件（但是不会删除子目录）</li>
+</ul>
+</li>
+<li>notes: <ul>
+<li><code>/q /s</code> 要这么用，不能连着用: <code>/qs</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="rd命令"><a href="#rd命令" class="headerlink" title="rd命令"></a>rd命令</h2><ul>
+<li><code>rd</code> 是 <code>rmdir</code> 的缩写，两个命令是等价的，用于删除文件夹和文件</li>
+<li>options:<ul>
+<li><code>/q</code>: 安静模式，带 <code>/s</code> 删除目录树时不要求确认</li>
+<li><code>/s</code>: 递归删除子目录和子文件</li>
+</ul>
+</li>
+<li>notes:<ul>
+<li><code>/q /s</code> 要这么用，不能连着用: <code>/qs</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="practices"><a href="#practices" class="headerlink" title="practices"></a>practices</h2><ul>
+<li><p>准备:</p>
+<figure class="highlight bat"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">md</span> test</span><br><span class="line"><span class="built_in">cd</span> test </span><br><span class="line"><span class="built_in">echo</span> <span class="number">1</span>.txt &gt; <span class="number">1</span>.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="number">2</span>.txt &gt; <span class="number">2</span>.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="number">3</span>.txt &gt; <span class="number">3</span>.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="number">1</span>.txt &gt; <span class="number">1</span>.bak</span><br><span class="line"><span class="built_in">md</span> subfolder</span><br><span class="line"><span class="built_in">cd</span> subfolder</span><br><span class="line"><span class="built_in">echo</span> sub.txt &gt; sub.txt</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>删除 test 目录下的所有的 以<code>txt</code>结尾文件: <code>del /q *.txt</code></p>
+</li>
+<li><p>删除 test 目录下的所有文件(包括子文件夹中的文件，不删除目录): <code>del /q /s *</code></p>
+</li>
+<li><p>删除test目录: <code>rd /q /s test</code></p>
+</li>
+</ul>
+
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2022/06/16/linux-sed%E5%91%BD%E4%BB%A4%EF%BC%8C%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/" target="_self">
+              <a href="/2022/06/17/windows%E5%92%8Clinux%E4%B8%AD%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%8D%A2%E8%A1%8C/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>上一页</span>
               </a>
@@ -181,22 +244,62 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime" title="更新时间"></i>
-              2022-06-17 19:09:13
+              2022-06-18 10:04:04
             </span>
             
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/dos/" title="dos">
+                        <b>#</b> dos
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/dos/" title="dos">
+                        <b>#</b> dos
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/commands/" title="commands">
+                        <b>#</b> commands
+                      </a>
+                    </span>
+                    
+                  </span>
+              
           </div>
           <div class="post-foot-prev">
-            
-              <a href="/2022/06/18/dos%E5%91%BD%E4%BB%A4del%E4%B8%8Erd/" target="_self">
-                <span>下一页</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
             
           </div>
         </div>
       
     </div>
     
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#dos%E5%91%BD%E4%BB%A4del%E4%B8%8Erd"><span class="toc-text">dos命令del与rd</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#del%E5%91%BD%E4%BB%A4"><span class="toc-text">del命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rd%E5%91%BD%E4%BB%A4"><span class="toc-text">rd命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#practices"><span class="toc-text">practices</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
 
     
       <div class="comments-container">
@@ -472,12 +575,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + windows%E5%92%8Clinux%E4%B8%AD%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%8D%A2%E8%A1%8C + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F17%2Fwindows%25E5%2592%258Clinux%25E4%25B8%25AD%25E6%2596%2587%25E6%259C%25AC%25E6%2596%2587%25E4%25BB%25B6%25E4%25B8%25AD%25E7%259A%2584%25E6%258D%25A2%25E8%25A1%258C%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + dos%E5%91%BD%E4%BB%A4del%E4%B8%8Erd + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F18%2Fdos%25E5%2591%25BD%25E4%25BB%25A4del%25E4%25B8%258Erd%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/17/windows%E5%92%8Clinux%E4%B8%AD%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%8D%A2%E8%A1%8C/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/18/dos%E5%91%BD%E4%BB%A4del%E4%B8%8Erd/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
