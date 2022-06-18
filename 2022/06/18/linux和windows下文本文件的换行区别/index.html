@@ -237,7 +237,7 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ cat -A test.txt</span><br><span class="line">1^M$</span><br><span class="line">2^M$</span><br><span class="line">3^I4 5</span><br><span class="line">$ dos2unix test.txt</span><br><span class="line">dos2unix: converting file test.txt to Unix format...</span><br><span class="line">$ cat -A test.txt</span><br><span class="line">1$</span><br><span class="line">2$</span><br><span class="line">3^I4 5</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>自己用命令实现: <code>sed -i 's/\r// test.txt'</code></li>
+<li>自己用命令实现: <code>sed -i 's/\r$// test.txt'</code></li>
 </ul>
 <h3 id="unix2dos"><a href="#unix2dos" class="headerlink" title="unix2dos"></a>unix2dos</h3><ul>
 <li>使用方法: <code>unix2dos test.txt</code></li>
