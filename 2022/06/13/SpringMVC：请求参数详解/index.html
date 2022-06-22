@@ -11,7 +11,7 @@
   
   <title>
     
-      springmvc请求参数详解 
+      SpringMVC： 请求参数详解 
       
       
       |
@@ -157,7 +157,7 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">springmvc请求参数详解</div>
+      <div class="post-title">SpringMVC： 请求参数详解</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="更新时间"></i>
@@ -200,7 +200,7 @@
           
       </div>
       <div class="markdown-body">
-        <h1 id="Spring-MVC-请求参数详解"><a href="#Spring-MVC-请求参数详解" class="headerlink" title="Spring MVC 请求参数详解"></a>Spring MVC 请求参数详解</h1><ul>
+        <h1 id="SpringMVC：-请求参数详解"><a href="#SpringMVC：-请求参数详解" class="headerlink" title="SpringMVC： 请求参数详解"></a>SpringMVC： 请求参数详解</h1><ul>
 <li>Http请求参数分为两种<ol>
 <li>url拼接参数</li>
 <li>请求体参数</li>
@@ -492,7 +492,7 @@
     <div class="title">目录</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-MVC-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-text">Spring MVC 请求参数详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#code-%E5%87%86%E5%A4%87"><span class="toc-text">code 准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E7%9A%84%E4%BA%94%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">获取请求参数的五种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SevletApi%E6%96%B9%E5%BC%8F%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="toc-text">SevletApi方式获取请求参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%90%8C%E5%90%8D%E5%8F%82%E6%95%B0%E6%8E%A5%E6%94%B6%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="toc-text">方法同名参数接收请求参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-1"><span class="toc-text">测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-RequestParam%E6%8C%87%E5%AE%9A%E5%8F%82%E6%95%B0%E5%90%8D"><span class="toc-text">使用 @RequestParam指定参数名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-2"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Bean%E5%AF%B9%E8%B1%A1%E6%8E%A5%E6%94%B6%E5%8F%82%E6%95%B0"><span class="toc-text">使用Bean对象接收参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-3"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-RequestBody-%E6%9D%A5%E6%8E%A5%E6%94%B6-json%E6%95%B0%E6%8D%AE"><span class="toc-text">使用 @RequestBody 来接收 json数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-4"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E4%BD%93%E5%86%85%E5%AE%B9"><span class="toc-text">请求体内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringMVC%EF%BC%9A-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-text">SpringMVC： 请求参数详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#code-%E5%87%86%E5%A4%87"><span class="toc-text">code 准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E7%9A%84%E4%BA%94%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">获取请求参数的五种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SevletApi%E6%96%B9%E5%BC%8F%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="toc-text">SevletApi方式获取请求参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%90%8C%E5%90%8D%E5%8F%82%E6%95%B0%E6%8E%A5%E6%94%B6%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="toc-text">方法同名参数接收请求参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-1"><span class="toc-text">测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-RequestParam%E6%8C%87%E5%AE%9A%E5%8F%82%E6%95%B0%E5%90%8D"><span class="toc-text">使用 @RequestParam指定参数名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-2"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Bean%E5%AF%B9%E8%B1%A1%E6%8E%A5%E6%94%B6%E5%8F%82%E6%95%B0"><span class="toc-text">使用Bean对象接收参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-3"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-RequestBody-%E6%9D%A5%E6%8E%A5%E6%94%B6-json%E6%95%B0%E6%8D%AE"><span class="toc-text">使用 @RequestBody 来接收 json数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-4"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E4%BD%93%E5%86%85%E5%AE%B9"><span class="toc-text">请求体内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
       
     </div>
   </div>
@@ -777,12 +777,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + springmvc%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3 + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F13%2Fspringmvc%25E8%25AF%25B7%25E6%25B1%2582%25E5%258F%2582%25E6%2595%25B0%25E8%25AF%25A6%25E8%25A7%25A3%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + SpringMVC%EF%BC%9A%20%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3 + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F13%2FSpringMVC%25EF%25BC%259A%25E8%25AF%25B7%25E6%25B1%2582%25E5%258F%2582%25E6%2595%25B0%25E8%25AF%25A6%25E8%25A7%25A3%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/13/springmvc%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/13/SpringMVC%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         

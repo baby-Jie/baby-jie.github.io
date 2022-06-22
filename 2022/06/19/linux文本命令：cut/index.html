@@ -11,7 +11,7 @@
   
   <title>
     
-      linux程序以后台方式启动 
+      linux文本命令：cut 
       
       
       |
@@ -157,22 +157,108 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">linux程序以后台方式启动</div>
+      <div class="post-title">linux文本命令：cut</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="更新时间"></i>
-          2022-06-14 14:54:50
+          2022-06-19 11:02:19
         </span>
         
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/linux/" title="linux">
+                    <b>#</b> linux
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/commands/" title="commands">
+                    <b>#</b> commands
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/linux/" title="linux">
+                    <b>#</b> linux
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/text-commands/" title="text commands">
+                    <b>#</b> text commands
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
       <div class="markdown-body">
-        
+        <h1 id="linux文本命令：sort"><a href="#linux文本命令：sort" class="headerlink" title="linux文本命令：sort"></a>linux文本命令：sort</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li><p><code>cut</code> - remove sections from each line of files </p>
+<ul>
+<li>切片与切块，从每行中删除部分内容</li>
+<li>cut可用于从每行提取部分文本并将其输出至标准输出。它能够接受多个文件参数或从标准输入中获取输入。</li>
+</ul>
+</li>
+<li><p>语法: <strong>cut OPTION… [FILE]…</strong></p>
+</li>
+<li><p><strong>options</strong>:</p>
+<table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-c list, –characters=list</td>
+<td align="center">提取由list定义的部分行。list可以是一个或者多个逗号分隔的数值范围</td>
+</tr>
+<tr>
+<td align="center">-f list, –fields=list</td>
+<td align="center">从行中提取由list定义的一个或者多个字段。list可以包含一个或多个字段，抑或是逗号分隔的字段范围</td>
+</tr>
+<tr>
+<td align="center">-d delim, –delimiter=delim</td>
+<td align="center">如果指定了-f，则使用 delim作为字段分隔符。在默认情况下，字段必须由单个制表符分隔</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="samples"><a href="#samples" class="headerlink" title="samples"></a>samples</h2><h3 id="牛刀小试"><a href="#牛刀小试" class="headerlink" title="牛刀小试"></a>牛刀小试</h3><ul>
+<li><p>我们也看到了，cut提取文本的方式“相当死板”。cut适合从其他程序产生的文件中提取文本，而不是从用户的输入中直接提取。来看一看我们的distros.txt文件是否“干净”到足以作为cat示例的良好样本。将cat与-A选项一起使用，就能看出该文件是否符合以制表符作为字段分隔符的要求：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos <span class="built_in">cut</span>]<span class="comment"># cat -A distros.txt </span></span><br><span class="line">SUSE^I10.2^I12/07/2006$</span><br><span class="line">Fedora^I10^I11/25/2008$</span><br><span class="line">SUSE^I11.0^I06/19/2008$</span><br><span class="line">Ubuntu^I8.04^I04/24/2008$</span><br><span class="line">Fedora^I8^I11/08/2007$</span><br><span class="line">SUSE^I10.3^I10/04/2007$</span><br><span class="line">Ubuntu^I6.10^I10/26/2006$</span><br><span class="line">Fedora^I7^I05/31/2007$</span><br><span class="line">Ubuntu^I7.10^I10/18/2007$</span><br><span class="line">Ubuntu^I7.04^I04/19/2007$</span><br><span class="line">SUSE^I10.1^I05/11/2006$</span><br><span class="line">Fedora^I6^I10/24/2006$</span><br><span class="line">Fedora^I9^I05/13/2008$</span><br><span class="line">Ubuntu^I6.06^I06/01/2006$</span><br><span class="line">Ubuntu^I8.10^I10/30/2008$</span><br><span class="line">Fedora^I5^I03/20/2006$</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>看起来是没有内嵌空格，全部以 <code>\t</code> 来分隔，那我们接下来把日期提取出来:</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos <span class="built_in">cut</span>]<span class="comment"># cut -f 3 distros.txt </span></span><br><span class="line">12/07/2006</span><br><span class="line">11/25/2008</span><br><span class="line">06/19/2008</span><br><span class="line">04/24/2008</span><br><span class="line">11/08/2007</span><br><span class="line">10/04/2007</span><br><span class="line">10/26/2006</span><br><span class="line">05/31/2007</span><br><span class="line">10/18/2007</span><br><span class="line">04/19/2007</span><br><span class="line">05/11/2006</span><br><span class="line">10/24/2006</span><br><span class="line">05/13/2008</span><br><span class="line">06/01/2006</span><br><span class="line">10/30/2008</span><br><span class="line">03/20/2006</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>如果我们只想要把日期中的年份提取出来呢？那么我们需要在前面的基础上，提取字符区间</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos <span class="built_in">cut</span>]<span class="comment"># cut -f3 distros.txt | cut -c7-10</span></span><br><span class="line">2006</span><br><span class="line">2008</span><br><span class="line">2008</span><br><span class="line">2008</span><br><span class="line">2007</span><br><span class="line">2007</span><br><span class="line">2006</span><br><span class="line">2007</span><br><span class="line">2007</span><br><span class="line">2007</span><br><span class="line">2006</span><br><span class="line">2006</span><br><span class="line">2008</span><br><span class="line">2006</span><br><span class="line">2008</span><br><span class="line">2006</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="查看当前系统中，所有的用户名称-etc-passwd"><a href="#查看当前系统中，所有的用户名称-etc-passwd" class="headerlink" title="查看当前系统中，所有的用户名称 /etc/passwd"></a>查看当前系统中，所有的用户名称 <code>/etc/passwd</code></h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos <span class="built_in">cut</span>]<span class="comment"># cut -d ":" -f1 /etc/passwd | head</span></span><br><span class="line">root</span><br><span class="line">bin</span><br><span class="line">daemon</span><br><span class="line">adm</span><br><span class="line">lp</span><br><span class="line"><span class="built_in">sync</span></span><br><span class="line">shutdown</span><br><span class="line">halt</span><br><span class="line">mail</span><br><span class="line">operator</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="扩展制表符"><a href="#扩展制表符" class="headerlink" title="扩展制表符"></a>扩展制表符</h2><ul>
+<li><p>distros.txt文件采用了适合于cut提取字段的理想格式。但如果我们希望文件完全能由cut按照字符（而非字段）操作，该怎么办？这需要使用相应数量的空格符替换掉文件中的制表符。幸运的是，GNU Coreutils软件包中就有这么一件工具：expand。该命令接受一个或多个文件参数，也可以接受标准输入，修改后的文本被输出至标准输出。</p>
+</li>
+<li><p>如果事先通过expand处理过distros.txt文件，就能直接使用cut -c从文件中提取任意范围的字符。例如，我们可以先使用expand扩展该文件，再使用cut提取每行第23个字符到行尾的所有内容，这样就得到了发行年份：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">expand</span> distros.txt | <span class="built_in">cut</span> -c 23</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2022/06/13/SpringMVC%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" target="_self">
+              <a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Auniq/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>上一页</span>
               </a>
@@ -181,13 +267,47 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime" title="更新时间"></i>
-              2022-06-14 14:54:50
+              2022-06-19 11:02:19
             </span>
             
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/linux/" title="linux">
+                        <b>#</b> linux
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/commands/" title="commands">
+                        <b>#</b> commands
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/linux/" title="linux">
+                        <b>#</b> linux
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/text-commands/" title="text commands">
+                        <b>#</b> text commands
+                      </a>
+                    </span>
+                    
+                  </span>
+              
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2022/06/15/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/" target="_self">
+              <a href="/2022/06/20/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/" target="_self">
                 <span>下一页</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -197,6 +317,23 @@
       
     </div>
     
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Asort"><span class="toc-text">linux文本命令：sort</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#samples"><span class="toc-text">samples</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%9B%E5%88%80%E5%B0%8F%E8%AF%95"><span class="toc-text">牛刀小试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E4%B8%AD%EF%BC%8C%E6%89%80%E6%9C%89%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D%E7%A7%B0-etc-passwd"><span class="toc-text">查看当前系统中，所有的用户名称 &#x2F;etc&#x2F;passwd</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E5%88%B6%E8%A1%A8%E7%AC%A6"><span class="toc-text">扩展制表符</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
 
     
       <div class="comments-container">
@@ -472,12 +609,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + linux%E7%A8%8B%E5%BA%8F%E4%BB%A5%E5%90%8E%E5%8F%B0%E6%96%B9%E5%BC%8F%E5%90%AF%E5%8A%A8 + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F14%2Flinux%25E7%25A8%258B%25E5%25BA%258F%25E4%25BB%25A5%25E5%2590%258E%25E5%258F%25B0%25E6%2596%25B9%25E5%25BC%258F%25E5%2590%25AF%25E5%258A%25A8%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Acut + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F19%2Flinux%25E6%2596%2587%25E6%259C%25AC%25E5%2591%25BD%25E4%25BB%25A4%25EF%25BC%259Acut%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/14/linux%E7%A8%8B%E5%BA%8F%E4%BB%A5%E5%90%8E%E5%8F%B0%E6%96%B9%E5%BC%8F%E5%90%AF%E5%8A%A8/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Acut/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         

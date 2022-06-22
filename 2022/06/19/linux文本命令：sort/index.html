@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="星火燎原" />
+  <meta name="author" content="MingXing Sun" />
+  <meta name="description" content="星星之火，可以燎原" />
+  
+  
+  <title>
+    
+      linux文本命令：sort 
+      
+      
+      |
+    
+     星火燎原
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/ace.jpg">
+    <link rel="icon" href="/images/ace.jpg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/color-scheme.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/comments.css">
+
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/ace.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Ace</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">linux文本命令：sort</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2022-06-19 08:21:33
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/linux/" title="linux">
+                    <b>#</b> linux
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/commands/" title="commands">
+                    <b>#</b> commands
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/linux/" title="linux">
+                    <b>#</b> linux
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/text-commands/" title="text commands">
+                    <b>#</b> text commands
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="linux文本命令：sort"><a href="#linux文本命令：sort" class="headerlink" title="linux文本命令：sort"></a>linux文本命令：sort</h1><h2 id="sort命令简介"><a href="#sort命令简介" class="headerlink" title="sort命令简介"></a>sort命令简介</h2><ul>
+<li><p><code>sort</code> - <code>sort lines of text files</code> 对文本行进行排序</p>
+</li>
+<li><p>sort可以排序多个文件并合并成单个有序文件: <code>sort file1 file2 file3 &gt; output</code></p>
+</li>
+<li><p>语法：<code>sort [option]... [file]...</code></p>
+</li>
+<li><p><strong>options</strong>:</p>
+<table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>-b, --ignore-leading-blanks</code></td>
+<td align="center">在默认情况下，对整行进行排序，从行内的的第一个字符开始。该选项使sort忽略每行开头的空白字符，从第一个非空白字符串开始排序</td>
+</tr>
+<tr>
+<td align="center"><code>-f, --ignore-case</code></td>
+<td align="center">排序时不区分大小写</td>
+</tr>
+<tr>
+<td align="center"><code>-n,--numeric-sort</code></td>
+<td align="center">根据字符串的数值排序，而不是按照字典顺序。</td>
+</tr>
+<tr>
+<td align="center"><code>-r, --reverse</code></td>
+<td align="center">降序排序</td>
+</tr>
+<tr>
+<td align="center"><code>-k, --key=field1[,field2]</code></td>
+<td align="center">不再按照整行排序，按照字段区间范围排序</td>
+</tr>
+<tr>
+<td align="center"><code>-m, --merge</code></td>
+<td align="center">每个参数视为已经排序过的文件，只合并，不再执行额外的排序</td>
+</tr>
+<tr>
+<td align="center"><code>-o, --output=file</code></td>
+<td align="center">将output写到目标文件中，而不是标准输出</td>
+</tr>
+<tr>
+<td align="center"><code>-t, --field-separator=char</code></td>
+<td align="center">定义字段分隔符。在默认情况下，字段由<strong>空白符</strong>(空格符或制表符)分隔</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="samples"><a href="#samples" class="headerlink" title="samples"></a>samples</h2><h3 id="牛刀小试"><a href="#牛刀小试" class="headerlink" title="牛刀小试"></a>牛刀小试</h3><ul>
+<li><p>创建一个文本文件 <code>sort.txt</code></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c</span><br><span class="line">b</span><br><span class="line">a</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>使用 <code>sort</code> 进行排序（并不会改变源文件）</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sort</span> sort.txt</span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="查看-usr-share-目录下-所有文件磁盘占用情况并进行排序"><a href="#查看-usr-share-目录下-所有文件磁盘占用情况并进行排序" class="headerlink" title="查看  /usr/share/ 目录下 所有文件磁盘占用情况并进行排序"></a>查看  <code>/usr/share/</code> 目录下 所有文件磁盘占用情况并进行排序</h3><ul>
+<li><p>查看 <code>/usr/share/</code> 目录磁盘占用情况, <code>du -s /usr/share/* | head</code>， 这里由于文件太多就截取了前10个</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">44	/usr/share/abrt</span><br><span class="line">684	/usr/share/aclocal</span><br><span class="line">160	/usr/share/aclocal-1.13</span><br><span class="line">1332	/usr/share/alsa</span><br><span class="line">648	/usr/share/anaconda</span><br><span class="line">36	/usr/share/applications</span><br><span class="line">1100	/usr/share/augeas</span><br><span class="line">440	/usr/share/authconfig</span><br><span class="line">1700	/usr/share/autoconf</span><br><span class="line">1092	/usr/share/automake-1.13</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>使用sort进行排序: <code>du -s /usr/share/* | sort | head</code></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos ~]# du -s /usr/share/* | sort | head</span><br><span class="line">0	/usr/share/gcc-4.8.5</span><br><span class="line">0	/usr/share/magic</span><br><span class="line">0	/usr/share/redhat-release</span><br><span class="line">100588	/usr/share/doc</span><br><span class="line">1092	/usr/share/automake-1.13</span><br><span class="line">1100	/usr/share/augeas</span><br><span class="line">114608	/usr/share/locale</span><br><span class="line">116	/usr/share/gcc-4.8.2</span><br><span class="line">120	/usr/share/zsh</span><br><span class="line">12	/usr/share/glvnd</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>从以上结果可以发现，该排序结果使按照字典序进行排序的，不是我们想要的结果，我们可以添加 <code>-n</code> 选项指定按照数字排序: <code>du -s /usr/share/* | sort -n | head</code></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos ~]# du -s /usr/share/* | sort -n | head</span><br><span class="line">0	/usr/share/gcc-4.8.5</span><br><span class="line">0	/usr/share/magic</span><br><span class="line">0	/usr/share/redhat-release</span><br><span class="line">4	/usr/share/desktop-directories</span><br><span class="line">4	/usr/share/dict</span><br><span class="line">4	/usr/share/empty</span><br><span class="line">4	/usr/share/file</span><br><span class="line">4	/usr/share/firewalld</span><br><span class="line">4	/usr/share/games</span><br><span class="line">4	/usr/share/gnome</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>呃，以上是升序排序，我们要的是占用磁盘最多的文件，应该使用<code>-r</code> 来降序排序: <code>du -s /usr/share/* | sort -nr | head</code></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos ~]# du -s /usr/share/* | sort -nr | head</span><br><span class="line">114608	/usr/share/locale</span><br><span class="line">100588	/usr/share/doc</span><br><span class="line">45080	/usr/share/man</span><br><span class="line">25620	/usr/share/vim</span><br><span class="line">21648	/usr/share/perl5</span><br><span class="line">18832	/usr/share/backgrounds</span><br><span class="line">9704	/usr/share/i18n</span><br><span class="line">9196	/usr/share/cracklib</span><br><span class="line">7888	/usr/share/hwdata</span><br><span class="line">6436	/usr/share/info</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="对-ls-l-usr-bin-进行文件大小降序排序"><a href="#对-ls-l-usr-bin-进行文件大小降序排序" class="headerlink" title="对 ls -l /usr/bin 进行文件大小降序排序"></a>对 <code>ls -l /usr/bin</code> 进行文件大小降序排序</h3><ul>
+<li><p><code>ls -l</code> 的格式如下，文件大小位于第五个字段</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rwxr-xr-x    1 root root       11248 Oct  2  2020 abrt-action-analyze-backtrace</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>所以命令应该为: <code>ls -l /usr/bin | sort -nrk 5 | head</code></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos ~]<span class="comment"># ls -l /usr/bin | sort -nrk 5 | head</span></span><br><span class="line">-rwxr-xr-x    1 root root    19615928 Apr 13  2019 mysqlpump</span><br><span class="line">-rwxr-xr-x    1 root root    13574160 Apr 13  2019 mysql_upgrade</span><br><span class="line">-rwxr-xr-x    1 root root    11996472 Apr 13  2019 mysqlbinlog</span><br><span class="line">-rwxr-xr-x    1 root root    11279312 Apr 13  2019 mysql_install_db</span><br><span class="line">-rwxr-xr-x    1 root root    11265296 Apr 13  2019 mysql</span><br><span class="line">-rwxr-xr-x    1 root root    10371032 Apr 13  2019 mysqldump</span><br><span class="line">-rwxr-xr-x    1 root root    10295776 Apr 13  2019 mysqlcheck</span><br><span class="line">-rwxr-xr-x    1 root root    10062016 Apr 13  2019 mysqlslap</span><br><span class="line">-rwxr-xr-x    1 root root    10000960 Apr 13  2019 mysqladmin</span><br><span class="line">-rwxr-xr-x    1 root root     9992344 Apr 13  2019 mysqlimport</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="对多个字段进行排序"><a href="#对多个字段进行排序" class="headerlink" title="对多个字段进行排序"></a>对多个字段进行排序</h3><ul>
+<li><p>准备文件 <code>distros.txt</code></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SUSE	10.2	12/07/2006</span><br><span class="line">Fedora	10		11/25/2008</span><br><span class="line">SUSE	11.0	06/19/2008</span><br><span class="line">Ubuntu	8.04	04/24/2008</span><br><span class="line">Fedora	8		11/08/2007</span><br><span class="line">SUSE	10.3	10/04/2007</span><br><span class="line">Ubuntu	6.10	10/26/2006</span><br><span class="line">Fedora	7		05/31/2007</span><br><span class="line">Ubuntu	7.10	10/18/2007</span><br><span class="line">Ubuntu	7.04	04/19/2007</span><br><span class="line">SUSE	10.1	05/11/2006</span><br><span class="line">Fedora	6		10/24/2006</span><br><span class="line">Fedora	9		05/13/2008</span><br><span class="line">Ubuntu	6.06	06/01/2006</span><br><span class="line">Ubuntu	8.10	10/30/2008</span><br><span class="line">Fedora	5		03/20/2006</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>现在要对 <code>distros.txt</code> 先进行操作系统的排序，再根据版本号排序，我们先看直接 <code>sort</code> 的结果</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos <span class="built_in">sort</span>]<span class="comment"># sort distros.txt</span></span><br><span class="line">Fedora	10	11/25/2008</span><br><span class="line">Fedora	5	03/20/2006</span><br><span class="line">Fedora	6	10/24/2006</span><br><span class="line">Fedora	7	05/31/2007</span><br><span class="line">Fedora	8	11/08/2007</span><br><span class="line">Fedora	9	05/13/2008</span><br><span class="line">SUSE	10.1	05/11/2006</span><br><span class="line">SUSE	10.2	12/07/2006</span><br><span class="line">SUSE	10.3	10/04/2007</span><br><span class="line">SUSE	11.0	06/19/2008</span><br><span class="line">Ubuntu	6.06	06/01/2006</span><br><span class="line">Ubuntu	6.10	10/26/2006</span><br><span class="line">Ubuntu	7.04	04/19/2007</span><br><span class="line">Ubuntu	7.10	10/18/2007</span><br><span class="line">Ubuntu	8.04	04/24/2008</span><br><span class="line">Ubuntu	8.10	10/30/2008</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>从以上结果分析，虽然按照操作系统排序了，但是版本号排序结果不正确，<code>10</code> 排在了 <code>5</code> 的前面 ，这里应该按照多个字段排序：先按照第一个字段排序，然后再按照第二个字段进行数字排序: </p>
+<ul>
+<li><code>sort -k1,1 -k2n distros.txt</code> or <code>sort --key=1,1 --key=2n distros.txt</code></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos <span class="built_in">sort</span>]<span class="comment"># sort -k1,1 -k2n  distros.txt</span></span><br><span class="line">Fedora	5	03/20/2006</span><br><span class="line">Fedora	6	10/24/2006</span><br><span class="line">Fedora	7	05/31/2007</span><br><span class="line">Fedora	8	11/08/2007</span><br><span class="line">Fedora	9	05/13/2008</span><br><span class="line">Fedora	10	11/25/2008</span><br><span class="line">SUSE	10.1	05/11/2006</span><br><span class="line">SUSE	10.2	12/07/2006</span><br><span class="line">SUSE	10.3	10/04/2007</span><br><span class="line">SUSE	11.0	06/19/2008</span><br><span class="line">Ubuntu	6.06	06/01/2006</span><br><span class="line">Ubuntu	6.10	10/26/2006</span><br><span class="line">Ubuntu	7.04	04/19/2007</span><br><span class="line">Ubuntu	7.10	10/18/2007</span><br><span class="line">Ubuntu	8.04	04/24/2008</span><br><span class="line">Ubuntu	8.10	10/30/2008</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>解析:<ul>
+<li><code>-k1,1</code> 表示从第一个字段开始，到第一个字段结束，单纯以第一个字段排序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>如果我们想要对此文本进行一个日期降序排序呢？那我们要指定字段的同时要指定偏移量: </p>
+<ul>
+<li><code>sort -k3.7nbr -k3.1nbr -k3.4nbr distros.txt</code></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos <span class="built_in">sort</span>]<span class="comment"># sort -k3.7nbr -k3.1nbr -k3.4nbr distros.txt</span></span><br><span class="line">Fedora	10	11/25/2008</span><br><span class="line">Ubuntu	8.10	10/30/2008</span><br><span class="line">SUSE	11.0	06/19/2008</span><br><span class="line">Fedora	9	05/13/2008</span><br><span class="line">Ubuntu	8.04	04/24/2008</span><br><span class="line">Fedora	8	11/08/2007</span><br><span class="line">Ubuntu	7.10	10/18/2007</span><br><span class="line">SUSE	10.3	10/04/2007</span><br><span class="line">Fedora	7	05/31/2007</span><br><span class="line">Ubuntu	7.04	04/19/2007</span><br><span class="line">SUSE	10.2	12/07/2006</span><br><span class="line">Ubuntu	6.10	10/26/2006</span><br><span class="line">Fedora	6	10/24/2006</span><br><span class="line">Ubuntu	6.06	06/01/2006</span><br><span class="line">SUSE	10.1	05/11/2006</span><br><span class="line">Fedora	5	03/20/2006</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>解析: <code>-k3.7nbr</code><ul>
+<li><code>-k3</code> 表示第三段</li>
+<li><code>.7</code> 表示从第7个字符开始</li>
+<li><code>nr</code>: 数字降序排序</li>
+<li><code>b</code>: 去除前面的空白字符，因为第三段前面是有空白字符的，而且每一行的第三段前面的空白字符数量是不确定的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="对-etc-passwd-文件中的-用户默认shell进行排序"><a href="#对-etc-passwd-文件中的-用户默认shell进行排序" class="headerlink" title="对 /etc/passwd 文件中的 用户默认shell进行排序"></a>对 <code>/etc/passwd</code> 文件中的 用户默认shell进行排序</h3><ul>
+<li><p>该sample主要考察 自定义分隔符的使用 <code>sort</code>命令默认使用空白字符作为分隔符，那么我们这里就需要用到 <code>-t</code> 选项</p>
+</li>
+<li><p>先查看 <code>/etc/passwd</code> 文本文件</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos <span class="built_in">sort</span>]<span class="comment"># cat /etc/passwd</span></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line"><span class="built_in">sync</span>:x:5:0:<span class="built_in">sync</span>:/sbin:/bin/sync</span><br><span class="line">shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown</span><br><span class="line">halt:x:7:0:halt:/sbin:/sbin/halt</span><br><span class="line">mail:x:8:12:mail:/var/spool/mail:/sbin/nologin</span><br><span class="line">operator:x:11:0:operator:/root:/sbin/nologin</span><br><span class="line">games:x:12:100:games:/usr/games:/sbin/nologin</span><br><span class="line">ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin</span><br><span class="line">nobody:x:99:99:Nobody:/:/sbin/nologin</span><br><span class="line">systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin</span><br><span class="line">dbus:x:81:81:System message bus:/:/sbin/nologin</span><br><span class="line">polkitd:x:999:998:User <span class="keyword">for</span> polkitd:/:/sbin/nologin</span><br><span class="line">libstoragemgmt:x:998:997:daemon account <span class="keyword">for</span> libstoragemgmt:/var/run/lsm:/sbin/nologin</span><br><span class="line">rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin</span><br><span class="line">ntp:x:38:38::/etc/ntp:/sbin/nologin</span><br><span class="line">abrt:x:173:173::/etc/abrt:/sbin/nologin</span><br><span class="line">sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin</span><br><span class="line">postfix:x:89:89::/var/spool/postfix:/sbin/nologin</span><br><span class="line">chrony:x:997:995::/var/lib/chrony:/sbin/nologin</span><br><span class="line">tcpdump:x:72:72::/:/sbin/nologin</span><br><span class="line">syslog:x:996:994::/home/syslog:/bin/false</span><br><span class="line">lighthouse:x:1000:1000::/home/lighthouse:/bin/bash</span><br><span class="line">www:x:1001:1001::/home/www:/sbin/nologin</span><br><span class="line">mysql:x:1002:1002::/home/mysql:/sbin/nologin</span><br><span class="line">smx:x:1003:1003::/home/smx:/bin/bash</span><br><span class="line"><span class="built_in">test</span>:x:1004:1004::/home/test:/bin/bash</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>命令: <code>sort -t ':' -k7 /etc/passwd</code></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos <span class="built_in">sort</span>]<span class="comment"># sort -t ':' -k7 /etc/passwd</span></span><br><span class="line">lighthouse:x:1000:1000::/home/lighthouse:/bin/bash</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">smx:x:1003:1003::/home/smx:/bin/bash</span><br><span class="line"><span class="built_in">test</span>:x:1004:1004::/home/test:/bin/bash</span><br><span class="line">syslog:x:996:994::/home/syslog:/bin/false</span><br><span class="line"><span class="built_in">sync</span>:x:5:0:<span class="built_in">sync</span>:/sbin:/bin/sync</span><br><span class="line">halt:x:7:0:halt:/sbin:/sbin/halt</span><br><span class="line">abrt:x:173:173::/etc/abrt:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">chrony:x:997:995::/var/lib/chrony:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">dbus:x:81:81:System message bus:/:/sbin/nologin</span><br><span class="line">ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin</span><br><span class="line">games:x:12:100:games:/usr/games:/sbin/nologin</span><br><span class="line">libstoragemgmt:x:998:997:daemon account <span class="keyword">for</span> libstoragemgmt:/var/run/lsm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line">mail:x:8:12:mail:/var/spool/mail:/sbin/nologin</span><br><span class="line">mysql:x:1002:1002::/home/mysql:/sbin/nologin</span><br><span class="line">nobody:x:99:99:Nobody:/:/sbin/nologin</span><br><span class="line">ntp:x:38:38::/etc/ntp:/sbin/nologin</span><br><span class="line">operator:x:11:0:operator:/root:/sbin/nologin</span><br><span class="line">polkitd:x:999:998:User <span class="keyword">for</span> polkitd:/:/sbin/nologin</span><br><span class="line">postfix:x:89:89::/var/spool/postfix:/sbin/nologin</span><br><span class="line">rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin</span><br><span class="line">sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin</span><br><span class="line">systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin</span><br><span class="line">tcpdump:x:72:72::/:/sbin/nologin</span><br><span class="line">www:x:1001:1001::/home/www:/sbin/nologin</span><br><span class="line">shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>解析: <ul>
+<li><code>-t ':'</code> 指定分隔符为 <code>:</code></li>
+<li><code>-k7</code> 将第7个字段作为排序依据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/06/18/linux%E4%B8%AD%E7%9A%84%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2022-06-19 08:21:33
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/linux/" title="linux">
+                        <b>#</b> linux
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/commands/" title="commands">
+                        <b>#</b> commands
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/linux/" title="linux">
+                        <b>#</b> linux
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/text-commands/" title="text commands">
+                        <b>#</b> text commands
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Auniq/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Asort"><span class="toc-text">linux文本命令：sort</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#sort%E5%91%BD%E4%BB%A4%E7%AE%80%E4%BB%8B"><span class="toc-text">sort命令简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#samples"><span class="toc-text">samples</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%9B%E5%88%80%E5%B0%8F%E8%AF%95"><span class="toc-text">牛刀小试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B-usr-share-%E7%9B%AE%E5%BD%95%E4%B8%8B-%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E6%83%85%E5%86%B5%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-text">查看  &#x2F;usr&#x2F;share&#x2F; 目录下 所有文件磁盘占用情况并进行排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9-ls-l-usr-bin-%E8%BF%9B%E8%A1%8C%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E9%99%8D%E5%BA%8F%E6%8E%92%E5%BA%8F"><span class="toc-text">对 ls -l &#x2F;usr&#x2F;bin 进行文件大小降序排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-text">对多个字段进行排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9-etc-passwd-%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84-%E7%94%A8%E6%88%B7%E9%BB%98%E8%AE%A4shell%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-text">对 &#x2F;etc&#x2F;passwd 文件中的 用户默认shell进行排序</span></a></li></ol></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/baby-jie">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2022 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Asort + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F19%2Flinux%25E6%2596%2587%25E6%259C%25AC%25E5%2591%25BD%25E4%25BB%25A4%25EF%25BC%259Asort%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Asort/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -11,7 +11,7 @@
   
   <title>
     
-      linux程序以后台方式启动 
+      linux中的文本处理命令 
       
       
       |
@@ -157,22 +157,95 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">linux程序以后台方式启动</div>
+      <div class="post-title">linux中的文本处理命令</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="更新时间"></i>
-          2022-06-14 14:54:50
+          2022-06-18 20:52:42
         </span>
         
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/linux/" title="linux">
+                    <b>#</b> linux
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/commands/" title="commands">
+                    <b>#</b> commands
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/linux/" title="linux">
+                    <b>#</b> linux
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/text-commands/" title="text commands">
+                    <b>#</b> text commands
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
       <div class="markdown-body">
-        
+        <h1 id="linux中的文本处理命令"><a href="#linux中的文本处理命令" class="headerlink" title="linux中的文本处理命令"></a>linux中的文本处理命令</h1><h2 id="预览一下linux中一些文本处理命令"><a href="#预览一下linux中一些文本处理命令" class="headerlink" title="预览一下linux中一些文本处理命令"></a>预览一下linux中一些文本处理命令</h2><ul>
+<li><code>cat</code>: 查看和拼接文本文件</li>
+<li><code>sort</code>: 排序文本行</li>
+<li><code>uniq</code>: 报告或忽略重复的行</li>
+<li><code>cut</code>: 从每行中删除部分文件内容</li>
+<li><code>paste</code>: 合并行</li>
+<li><code>join</code>: 连接两个文件中具有公共字段的行</li>
+<li><code>comm</code>: 逐行比较两个已排序的文件</li>
+<li><code>diff</code>: 逐行比较两个文件</li>
+<li><code>patch</code>: 对源文件应用diff文件</li>
+<li><code>tr</code>:  转写或删除字符</li>
+<li><code>sed</code>: 用于文本过滤和转换的流编辑器</li>
+<li><code>aspell</code>: 交互式拼写检查器</li>
+</ul>
+<h2 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h2><ul>
+<li><code>cat</code>: <code>cancatenate files and print on the stanard output</code> 拼接文本并显示到标准输出</li>
+<li><strong>options</strong>:<ul>
+<li><code>-A, --show-all</code>  equivalent to <strong>-vET</strong><ul>
+<li>显示非打印字符和结束字符</li>
+</ul>
+</li>
+<li><code>-n, --number</code> number all output lines<ul>
+<li>显示行号</li>
+</ul>
+</li>
+<li><code>-s, --squeeze-blank</code> suppress repeated empty output lines<ul>
+<li>去除重复的空行（非空白行）</li>
+<li>拼接多个文件时，如果上一个文件末尾有一行空行，下一个文件开头有一行空行，将会合并成一个空行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="sort命令"><a href="#sort命令" class="headerlink" title="sort命令"></a>sort命令</h2><ul>
+<li><a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Asort">linux文本命令：sort</a></li>
+</ul>
+<h2 id="uniq-命令"><a href="#uniq-命令" class="headerlink" title="uniq 命令"></a>uniq 命令</h2><ul>
+<li><a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Auniq">linux文本命令：uniq</a></li>
+</ul>
+<h2 id="cut命令：切片与切块"><a href="#cut命令：切片与切块" class="headerlink" title="cut命令：切片与切块"></a>cut命令：切片与切块</h2>
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2022/06/13/SpringMVC%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" target="_self">
+              <a href="/2022/06/18/linux%E5%92%8Cwindows%E4%B8%8B%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E6%8D%A2%E8%A1%8C%E5%8C%BA%E5%88%AB/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>上一页</span>
               </a>
@@ -181,13 +254,47 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime" title="更新时间"></i>
-              2022-06-14 14:54:50
+              2022-06-18 20:52:42
             </span>
             
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/linux/" title="linux">
+                        <b>#</b> linux
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/commands/" title="commands">
+                        <b>#</b> commands
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/linux/" title="linux">
+                        <b>#</b> linux
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/text-commands/" title="text commands">
+                        <b>#</b> text commands
+                      </a>
+                    </span>
+                    
+                  </span>
+              
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2022/06/15/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/" target="_self">
+              <a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Asort/" target="_self">
                 <span>下一页</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -197,6 +304,23 @@
       
     </div>
     
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#linux%E4%B8%AD%E7%9A%84%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">linux中的文本处理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E8%A7%88%E4%B8%80%E4%B8%8Blinux%E4%B8%AD%E4%B8%80%E4%BA%9B%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">预览一下linux中一些文本处理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cat%E5%91%BD%E4%BB%A4"><span class="toc-text">cat命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sort%E5%91%BD%E4%BB%A4"><span class="toc-text">sort命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#uniq-%E5%91%BD%E4%BB%A4"><span class="toc-text">uniq 命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cut%E5%91%BD%E4%BB%A4%EF%BC%9A%E5%88%87%E7%89%87%E4%B8%8E%E5%88%87%E5%9D%97"><span class="toc-text">cut命令：切片与切块</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
 
     
       <div class="comments-container">
@@ -472,12 +596,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + linux%E7%A8%8B%E5%BA%8F%E4%BB%A5%E5%90%8E%E5%8F%B0%E6%96%B9%E5%BC%8F%E5%90%AF%E5%8A%A8 + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F14%2Flinux%25E7%25A8%258B%25E5%25BA%258F%25E4%25BB%25A5%25E5%2590%258E%25E5%258F%25B0%25E6%2596%25B9%25E5%25BC%258F%25E5%2590%25AF%25E5%258A%25A8%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + linux%E4%B8%AD%E7%9A%84%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4 + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F18%2Flinux%25E4%25B8%25AD%25E7%259A%2584%25E6%2596%2587%25E6%259C%25AC%25E5%25A4%2584%25E7%2590%2586%25E5%2591%25BD%25E4%25BB%25A4%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/14/linux%E7%A8%8B%E5%BA%8F%E4%BB%A5%E5%90%8E%E5%8F%B0%E6%96%B9%E5%BC%8F%E5%90%AF%E5%8A%A8/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/18/linux%E4%B8%AD%E7%9A%84%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
