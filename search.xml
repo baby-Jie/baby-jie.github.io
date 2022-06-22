@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>linux：bash遇到错误自动停止，不再继续执行</title>
+      <link href="/2022/06/23/linux%EF%BC%9Abash%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AF%E8%87%AA%E5%8A%A8%E5%81%9C%E6%AD%A2%EF%BC%8C%E4%B8%8D%E5%86%8D%E7%BB%A7%E7%BB%AD%E6%89%A7%E8%A1%8C/"/>
+      <url>/2022/06/23/linux%EF%BC%9Abash%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AF%E8%87%AA%E5%8A%A8%E5%81%9C%E6%AD%A2%EF%BC%8C%E4%B8%8D%E5%86%8D%E7%BB%A7%E7%BB%AD%E6%89%A7%E8%A1%8C/</url>
+      
+        <content type="html"><![CDATA[<h1 id="linux：bash遇到错误自动停止，不再继续执行"><a href="#linux：bash遇到错误自动停止，不再继续执行" class="headerlink" title="linux：bash遇到错误自动停止，不再继续执行"></a>linux：bash遇到错误自动停止，不再继续执行</h1><ul><li><p>首先看一段shell脚本</p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> start</span><br><span class="line"><span class="built_in">rm</span> <span class="built_in">test</span> <span class="comment"># test is not exist</span></span><br><span class="line"><span class="built_in">echo</span> end</span><br></pre></td></tr></tbody></table></figure></li><li><p>执行脚本</p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos files]<span class="comment"># bash test3.sh</span></span><br><span class="line">start</span><br><span class="line"><span class="built_in">rm</span>: cannot remove ‘<span class="built_in">test</span>’: No such file or directory</span><br><span class="line">end</span><br></pre></td></tr></tbody></table></figure></li><li><p>可以看到 虽然 <code>rm test</code> 执行失败了，但是 第三条命令依然执行了</p></li><li><p>这个结果不是我想要的，我想要bash在执行的过程中遇到错误就自动停止执行 有两种解决方案</p><ol><li><p>手动判断并退出</p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> start</span><br><span class="line"><span class="built_in">rm</span> <span class="built_in">test</span> <span class="comment"># test is not exist</span></span><br><span class="line"><span class="keyword">if</span> (($? != 0)); <span class="keyword">then</span></span><br><span class="line"><span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">echo</span> end</span><br></pre></td></tr></tbody></table></figure><ul><li><p>执行结果:</p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-16-5-centos files]<span class="comment"># bash test3.sh</span></span><br><span class="line">start</span><br><span class="line"><span class="built_in">rm</span>: cannot remove ‘<span class="built_in">test</span>’: No such file or directory</span><br></pre></td></tr></tbody></table></figure></li></ul></li><li><p>使用 <code>-e</code> 参数去执行脚本: <strong>bash -e test3.sh</strong></p></li></ol></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> bash </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> bash </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SpringMVC：Post请求乱码问题解决</title>
       <link href="/2022/06/22/SpringMVC%EF%BC%9APost%E8%AF%B7%E6%B1%82%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
       <url>/2022/06/22/SpringMVC%EF%BC%9APost%E8%AF%B7%E6%B1%82%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
