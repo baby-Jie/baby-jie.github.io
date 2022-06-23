@@ -195,8 +195,7 @@
       </div>
       <div class="markdown-body">
         <h1 id="快速打开环境变量面板"><a href="#快速打开环境变量面板" class="headerlink" title="快速打开环境变量面板"></a>快速打开环境变量面板</h1><ul>
-<li><p>如果想要添加一个环境变量你会怎么做？</p>
-<ul>
+<li>如果想要添加一个环境变量你会怎么做？<ul>
 <li>使用命令行 <code>setx JAVA_HOME d:\\libs\\jdk</code><ul>
 <li>单纯的加环境变量还好，但是如果往 <code>PATH</code> 中添加路径有两个致命的缺点<ol>
 <li>命令没写好，导致PATH路径被覆盖</li>
@@ -212,6 +211,8 @@
 </li>
 </ul>
 </li>
+</ul>
+<h2 id="使用命令行打开"><a href="#使用命令行打开" class="headerlink" title="使用命令行打开"></a>使用命令行打开</h2><ul>
 <li><p>可以看出以上两种方式都不太便捷，那么，有没有比较快捷的方法呢？有，你可以执行以下命令(运行处<kbd>Win</kbd>+<kbd>r</kbd>):</p>
 <ul>
 <li><code>rundll32 sysdm.cpl,EditEnvironmentVariables</code></li>
@@ -230,6 +231,28 @@
 <li><p>接下来我们只要在 运行处 键入: <code>env</code> 命令就可快速打开变量面板了</p>
 <ul>
 <li><img src="/../images/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/env3.jpg" alt="env"></li>
+</ul>
+</li>
+</ul>
+<h2 id="新方法：别名的方式"><a href="#新方法：别名的方式" class="headerlink" title="新方法：别名的方式"></a>新方法：别名的方式</h2><ul>
+<li><p><strong>doskey</strong> 类似于linux中的<code>alias</code></p>
+</li>
+<li><p>在cmd命令行窗口中 键入 <code>doskey var=rundll32 sysdm.cpl,EditEnvironmentVariables</code>，随后就可以通过 <code>var</code> 直接打开 环境变量面板，但是这种方式只能在当前窗口中有效。</p>
+</li>
+<li><p>永久有效</p>
+<ul>
+<li><p>创建一个 <code>bat</code> 脚本 <strong>start.bat</strong>：</p>
+<figure class="highlight bat"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">doskey</span> var=rundll32 sysdm.cpl,EditEnvironmentVariables</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>打开注册表: <code>regedit</code></p>
+<ul>
+<li>找到 <code>hkc\software\microsoft\command processor</code> 创建一个 <code>AutoRun</code> 的键，值为 <strong>REG_SIZE</strong> 类型，值为: <code>F:\softwares\quick\scripts\start.bat</code></li>
+</ul>
+</li>
+<li><p>再次打开cmd命令窗口，测试 <code>var</code> 命令是否能够直接打开环境变量面板。</p>
+</li>
+<li><p>但是这种方式不能直接在运行中使用 配置方面倒是简单了，但是没有上面的使用的方便</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -299,7 +322,7 @@
     <div class="title">目录</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF"><span class="toc-text">快速打开环境变量面板</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF"><span class="toc-text">快速打开环境变量面板</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%93%E5%BC%80"><span class="toc-text">使用命令行打开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E6%96%B9%E6%B3%95%EF%BC%9A%E5%88%AB%E5%90%8D%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-text">新方法：别名的方式</span></a></li></ol></li></ol>
       
     </div>
   </div>
