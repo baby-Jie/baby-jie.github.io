@@ -11,7 +11,7 @@
   
   <title>
     
-      linux程序以后台方式启动 
+      archive_a: 2022/6 
       
       
       |
@@ -112,106 +112,302 @@
 
 
       <div class="flex-container">
-        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
-<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
 
+<!-- last: 按年份把文章分组，当前遍历到的年份 -->
+<!-- now: 当前遍历到的文章的发布年份 -->
 
-  <!-- LaTex Display -->
-
-  
-    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
-  
-  <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    }
-  </script>
-
-
-
-
-
-  <!-- clipboard -->
-
-  
-    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
-  
-  
-<script src="/js/codeCopy.js"></script>
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
-  <div class="container post-details" id="post-details">
-    <div class="post-content">
-      <div class="post-title">linux程序以后台方式启动</div>
-      <div class="post-attach">
-        <span class="post-pubtime">
-          <i class="iconfont icon-updatetime" title="更新时间"></i>
-          2022-06-14 14:54:50
-        </span>
-        
-      </div>
-      <div class="markdown-body">
-        
-      </div>
-      
-        <div class="prev-or-next">
-          <div class="post-foot-next">
-            
-              <a href="/2022/06/13/SpringMVC%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" target="_self">
-                <i class="iconfont icon-chevronleft"></i>
-                <span>上一页</span>
-              </a>
-            
-          </div>
-          <div class="post-attach">
-            <span class="post-pubtime">
-              <i class="iconfont icon-updatetime" title="更新时间"></i>
-              2022-06-14 14:54:50
-            </span>
-            
-          </div>
-          <div class="post-foot-prev">
-            
-              <a href="/2022/06/15/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/" target="_self">
-                <span>下一页</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
-            
-          </div>
+<div class="container archives">
+  <div class="post-list">
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2022</span>
+          </h2>
         </div>
       
-    </div>
+      <div class="post-item" title="linux命令：which、locate、find命令的区别">
+        <div class="time-m-d">06-25</div>
+        <div class="title">
+          <a href="/2022/06/25/linux%EF%BC%9Awhich%E3%80%81locate%E3%80%81find%E5%91%BD%E4%BB%A4%E7%9A%84%E5%8C%BA%E5%88%AB/">
+            <span>linux命令：which、locate、find命令的区别</span>
+          </a>
+        </div>
+      </div>
     
-
+      <div class="post-item" title="linux：shell脚本练习">
+        <div class="time-m-d">06-24</div>
+        <div class="title">
+          <a href="/2022/06/24/linux%EF%BC%9Ashell%E8%84%9A%E6%9C%AC%E7%BB%83%E4%B9%A0/">
+            <span>linux：shell脚本练习</span>
+          </a>
+        </div>
+      </div>
     
-      <div class="comments-container">
-        
-
-
-
-
-
-
-
+      <div class="post-item" title="linux：shell脚本执行方式">
+        <div class="time-m-d">06-24</div>
+        <div class="title">
+          <a href="/2022/06/24/linux%EF%BC%9Ashell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%E6%96%B9%E5%BC%8F/">
+            <span>linux：shell脚本执行方式</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="linux：bash遇到错误自动停止，不再继续执行">
+        <div class="time-m-d">06-23</div>
+        <div class="title">
+          <a href="/2022/06/23/linux%EF%BC%9Abash%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AF%E8%87%AA%E5%8A%A8%E5%81%9C%E6%AD%A2%EF%BC%8C%E4%B8%8D%E5%86%8D%E7%BB%A7%E7%BB%AD%E6%89%A7%E8%A1%8C/">
+            <span>linux：bash遇到错误自动停止，不再继续执行</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="SpringMVC：Post请求乱码问题解决">
+        <div class="time-m-d">06-22</div>
+        <div class="title">
+          <a href="/2022/06/22/SpringMVC%EF%BC%9APost%E8%AF%B7%E6%B1%82%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+            <span>SpringMVC：Post请求乱码问题解决</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="linux文本命令: awk">
+        <div class="time-m-d">06-22</div>
+        <div class="title">
+          <a href="/2022/06/22/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Aawk/">
+            <span>linux文本命令: awk</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="学习计划">
+        <div class="time-m-d">06-20</div>
+        <div class="title">
+          <a href="/2022/06/20/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/">
+            <span>学习计划</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="linux文本命令：cut">
+        <div class="time-m-d">06-19</div>
+        <div class="title">
+          <a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Acut/">
+            <span>linux文本命令：cut</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="linux文本命令：uniq">
+        <div class="time-m-d">06-19</div>
+        <div class="title">
+          <a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Auniq/">
+            <span>linux文本命令：uniq</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="linux文本命令：sort">
+        <div class="time-m-d">06-19</div>
+        <div class="title">
+          <a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Asort/">
+            <span>linux文本命令：sort</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="linux中的文本处理命令">
+        <div class="time-m-d">06-18</div>
+        <div class="title">
+          <a href="/2022/06/18/linux%E4%B8%AD%E7%9A%84%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/">
+            <span>linux中的文本处理命令</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="linux和windows下文本文件的换行区别">
+        <div class="time-m-d">06-18</div>
+        <div class="title">
+          <a href="/2022/06/18/linux%E5%92%8Cwindows%E4%B8%8B%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E6%8D%A2%E8%A1%8C%E5%8C%BA%E5%88%AB/">
+            <span>linux和windows下文本文件的换行区别</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="dos命令del与rd">
+        <div class="time-m-d">06-18</div>
+        <div class="title">
+          <a href="/2022/06/18/dos%E5%91%BD%E4%BB%A4del%E4%B8%8Erd/">
+            <span>dos命令del与rd</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="windows和linux中文本文件中的换行">
+        <div class="time-m-d">06-17</div>
+        <div class="title">
+          <a href="/2022/06/17/windows%E5%92%8Clinux%E4%B8%AD%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%8D%A2%E8%A1%8C/">
+            <span>windows和linux中文本文件中的换行</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="linux sed命令，强大的文本处理命令">
+        <div class="time-m-d">06-16</div>
+        <div class="title">
+          <a href="/2022/06/16/linux-sed%E5%91%BD%E4%BB%A4%EF%BC%8C%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/">
+            <span>linux sed命令，强大的文本处理命令</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="mvvm:wpf事件binding command">
+        <div class="time-m-d">06-16</div>
+        <div class="title">
+          <a href="/2022/06/16/mvvm-wpf%E4%BA%8B%E4%BB%B6binding-command/">
+            <span>mvvm:wpf事件binding command</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="快速打开环境变量面板">
+        <div class="time-m-d">06-15</div>
+        <div class="title">
+          <a href="/2022/06/15/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%9D%A2%E6%9D%BF/">
+            <span>快速打开环境变量面板</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="linux程序以后台方式启动">
+        <div class="time-m-d">06-14</div>
+        <div class="title">
+          <a href="/2022/06/14/linux%EF%BC%9A%E7%A8%8B%E5%BA%8F%E4%BB%A5%E5%90%8E%E5%8F%B0%E6%96%B9%E5%BC%8F%E5%90%AF%E5%8A%A8/">
+            <span>linux程序以后台方式启动</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="SpringMVC： 请求参数详解">
+        <div class="time-m-d">06-13</div>
+        <div class="title">
+          <a href="/2022/06/13/SpringMVC%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/">
+            <span>SpringMVC： 请求参数详解</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="linux命令tar的使用">
+        <div class="time-m-d">06-08</div>
+        <div class="title">
+          <a href="/2022/06/08/linux%E5%91%BD%E4%BB%A4tar%E7%9A%84%E4%BD%BF%E7%94%A8/">
+            <span>linux命令tar的使用</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="设计模式：单例模式">
+        <div class="time-m-d">06-08</div>
+        <div class="title">
+          <a href="/2022/06/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+            <span>设计模式：单例模式</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="ubuntu下apt的使用">
+        <div class="time-m-d">06-08</div>
+        <div class="title">
+          <a href="/2022/06/08/ubuntu%E4%B8%8Bapt%E7%9A%84%E4%BD%BF%E7%94%A8/">
+            <span>ubuntu下apt的使用</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="jdk的安装">
+        <div class="time-m-d">06-07</div>
+        <div class="title">
+          <a href="/2022/06/07/jdk%E7%9A%84%E5%AE%89%E8%A3%85/">
+            <span>jdk的安装</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="无限背包问题">
+        <div class="time-m-d">06-02</div>
+        <div class="title">
+          <a href="/2022/06/02/%E6%97%A0%E9%99%90%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">
+            <span>无限背包问题</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="01背包问题">
+        <div class="time-m-d">06-01</div>
+        <div class="title">
+          <a href="/2022/06/01/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">
+            <span>01背包问题</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="wpf绑定失败回滚">
+        <div class="time-m-d">05-31</div>
+        <div class="title">
+          <a href="/2022/05/31/wpf%E7%BB%91%E5%AE%9A%E5%A4%B1%E8%B4%A5%E5%9B%9E%E6%BB%9A/">
+            <span>wpf绑定失败回滚</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="链表中的节点每k个翻转">
+        <div class="time-m-d">05-30</div>
+        <div class="title">
+          <a href="/2022/05/30/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%E6%AF%8Fk%E4%B8%AA%E7%BF%BB%E8%BD%AC/">
+            <span>链表中的节点每k个翻转</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="链表内指定区间反转">
+        <div class="time-m-d">05-30</div>
+        <div class="title">
+          <a href="/2022/05/30/%E9%93%BE%E8%A1%A8%E5%86%85%E6%8C%87%E5%AE%9A%E5%8C%BA%E9%97%B4%E5%8F%8D%E8%BD%AC/">
+            <span>链表内指定区间反转</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="dos命令copy与xcopy">
+        <div class="time-m-d">05-29</div>
+        <div class="title">
+          <a href="/2022/05/29/dos%E5%91%BD%E4%BB%A4copy%E4%B8%8Excopy/">
+            <span>dos命令copy与xcopy</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="c程序定位段错误segment fault">
+        <div class="time-m-d">05-28</div>
+        <div class="title">
+          <a href="/2022/05/28/c%E7%A8%8B%E5%BA%8F%E5%AE%9A%E4%BD%8D%E6%AE%B5%E9%94%99%E8%AF%AFsegment-fault/">
+            <span>c程序定位段错误segment fault</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="实现linux的cat命令">
+        <div class="time-m-d">05-27</div>
+        <div class="title">
+          <a href="/2022/05/27/%E5%AE%9E%E7%8E%B0linux%E7%9A%84cat%E5%91%BD%E4%BB%A4/">
+            <span>实现linux的cat命令</span>
+          </a>
+        </div>
       </div>
     
   </div>
-
+</div>
 
         
 <div class="footer">
@@ -465,24 +661,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + linux%E7%A8%8B%E5%BA%8F%E4%BB%A5%E5%90%8E%E5%8F%B0%E6%96%B9%E5%BC%8F%E5%90%AF%E5%8A%A8 + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F14%2Flinux%25E7%25A8%258B%25E5%25BA%258F%25E4%25BB%25A5%25E5%2590%258E%25E5%258F%25B0%25E6%2596%25B9%25E5%25BC%258F%25E5%2590%25AF%25E5%258A%25A8%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/14/linux%E7%A8%8B%E5%BA%8F%E4%BB%A5%E5%90%8E%E5%8F%B0%E6%96%B9%E5%BC%8F%E5%90%AF%E5%8A%A8/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
   
   
 <script src="/js/shares.js"></script>
