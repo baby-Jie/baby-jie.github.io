@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>linux：login shell and no login shell</title>
+      <link href="/2022/06/25/linux%EF%BC%9Alogin-shell-and-no-login-shell/"/>
+      <url>/2022/06/25/linux%EF%BC%9Alogin-shell-and-no-login-shell/</url>
+      
+        <content type="html"><![CDATA[<h1 id="linux：login-shell-and-no-login-shell"><a href="#linux：login-shell-and-no-login-shell" class="headerlink" title="linux：login shell and no login shell"></a>linux：login shell and no login shell</h1><ul><li><p>先说结论，自己摸索下来（centos）的结果</p><ul><li><p><code>login shell(su - username)</code>:</p><ul><li><code>/etc/profile</code></li><li><code>~/.bash_profile</code></li><li>退出时执行 <code>~/.bash_logout</code></li></ul></li><li><p><code>no login shell(su name)</code>:</p><ul><li><code>~/.bashrc</code></li></ul></li></ul></li></ul><h2 id="login-shell"><a href="#login-shell" class="headerlink" title="login shell"></a>login shell</h2><ul><li><p>结论：依次执行 <code>/etc/profile</code> and <code>~/.bash_profile</code> 两个脚本文件，切换到用户的家目录</p></li><li><p>通过命令 <code>su - smx</code> 或者 ssh远程登陆 </p></li><li><p>会自动执行哪些 <code>shell</code>脚本</p><ol><li><p>首先执行的是 <code>/etc/profile</code> 脚本</p></li><li><p>其次执行的是 <code>~/.bash_profile</code> 脚本</p><ul><li><p>在 <code>~/.bash_profile</code> 脚本中又执行了 <code>~/.bashrc</code> 脚本</p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .bash_profile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Get the aliases and functions</span></span><br><span class="line"><span class="keyword">if</span> [ -f ~/.bashrc ]; <span class="keyword">then</span></span><br><span class="line">. ~/.bashrc</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure></li><li><p>在 <code>~/.bashrc</code>脚本中又执行了 <code>/etc/bashrc</code> 脚本</p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .bashrc</span></span><br><span class="line"><span class="keyword">if</span> [ -f /etc/bashrc ]; <span class="keyword">then</span></span><br><span class="line">. /etc/bashrc</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure></li></ul></li></ol></li><li><p>如果在上面四个脚本的末尾都添加一句打印信息，那么登陆shell的执行结果应该是</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this is /etc/profile</span><br><span class="line">this is /etc/bashrc</span><br><span class="line">this is .bashrc for root user</span><br><span class="line">this is .bash_profile for root user</span><br></pre></td></tr></tbody></table></figure></li><li><p>退出时会执行 <code>~/.bash_logout</code> 脚本文件</p></li></ul><h2 id="no-login-shell"><a href="#no-login-shell" class="headerlink" title="no login shell"></a>no login shell</h2><ul><li>结论: 只执行 <code>~/.bashrc</code> 脚本文件，且去切换当前目录</li><li>通过命令 <code>su smx</code> 来切换用户</li><li>只会执行 <code>~/.bashrc</code> 脚本文件<ul><li><code>~/.bashrc</code> 内部 调用了 <code>/etc/bashrc</code></li></ul></li><li>退出时不会执行 <code>~/.bash_logout</code> 脚本文件</li></ul><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ul><li>环境变量最好写在 <code>~/.bashrc</code> 文件中，因为不管 <code>login shell</code> 还是 <code>no login shell</code> 都会执行 <code>~/.bashrc</code></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> shell </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> shell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux命令：which、locate、find命令的区别</title>
       <link href="/2022/06/25/linux%EF%BC%9Awhich%E3%80%81locate%E3%80%81find%E5%91%BD%E4%BB%A4%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
       <url>/2022/06/25/linux%EF%BC%9Awhich%E3%80%81locate%E3%80%81find%E5%91%BD%E4%BB%A4%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
@@ -288,7 +315,7 @@
       <link href="/2022/06/18/linux%E4%B8%AD%E7%9A%84%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/"/>
       <url>/2022/06/18/linux%E4%B8%AD%E7%9A%84%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/</url>
       
-        <content type="html"><![CDATA[<h1 id="linux中的文本处理命令"><a href="#linux中的文本处理命令" class="headerlink" title="linux中的文本处理命令"></a>linux中的文本处理命令</h1><h2 id="预览一下linux中一些文本处理命令"><a href="#预览一下linux中一些文本处理命令" class="headerlink" title="预览一下linux中一些文本处理命令"></a>预览一下linux中一些文本处理命令</h2><ul><li><code>cat</code>: 查看和拼接文本文件</li><li><code>sort</code>: 排序文本行</li><li><code>uniq</code>: 报告或忽略重复的行</li><li><code>cut</code>: 从每行中删除部分文件内容</li><li><code>paste</code>: 合并行</li><li><code>join</code>: 连接两个文件中具有公共字段的行</li><li><code>comm</code>: 逐行比较两个已排序的文件</li><li><code>diff</code>: 逐行比较两个文件</li><li><code>patch</code>: 对源文件应用diff文件</li><li><code>tr</code>:  转写或删除字符</li><li><code>sed</code>: 用于文本过滤和转换的流编辑器</li><li><code>aspell</code>: 交互式拼写检查器</li></ul><h2 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h2><ul><li><code>cat</code>: <code>cancatenate files and print on the stanard output</code> 拼接文本并显示到标准输出</li><li><strong>options</strong>:<ul><li><code>-A, --show-all</code>  equivalent to <strong>-vET</strong><ul><li>显示非打印字符和结束字符</li></ul></li><li><code>-n, --number</code> number all output lines<ul><li>显示行号</li></ul></li><li><code>-s, --squeeze-blank</code> suppress repeated empty output lines<ul><li>去除重复的空行（非空白行）</li><li>拼接多个文件时，如果上一个文件末尾有一行空行，下一个文件开头有一行空行，将会合并成一个空行</li></ul></li></ul></li></ul><h2 id="sort命令"><a href="#sort命令" class="headerlink" title="sort命令"></a>sort命令</h2><ul><li><a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Asort">linux文本命令：sort</a></li></ul><h2 id="uniq-命令"><a href="#uniq-命令" class="headerlink" title="uniq 命令"></a>uniq 命令</h2><ul><li><a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Auniq">linux文本命令：uniq</a></li></ul><h2 id="cut命令：切片与切块"><a href="#cut命令：切片与切块" class="headerlink" title="cut命令：切片与切块"></a>cut命令：切片与切块</h2>]]></content>
+        <content type="html"><![CDATA[<h1 id="linux中的文本处理命令"><a href="#linux中的文本处理命令" class="headerlink" title="linux中的文本处理命令"></a>linux中的文本处理命令</h1><h2 id="预览一下linux中一些文本处理命令"><a href="#预览一下linux中一些文本处理命令" class="headerlink" title="预览一下linux中一些文本处理命令"></a>预览一下linux中一些文本处理命令</h2><ul><li><code>cat</code>: 查看和拼接文本文件</li><li><code>sort</code>: 排序文本行</li><li><code>uniq</code>: 报告或忽略重复的行</li><li><code>cut</code>: 从每行中删除部分文件内容</li><li><code>paste</code>: 合并行</li><li><code>join</code>: 连接两个文件中具有公共字段的行</li><li><code>comm</code>: 逐行比较两个已排序的文件</li><li><code>diff</code>: 逐行比较两个文件</li><li><code>patch</code>: 对源文件应用diff文件</li><li><code>tr</code>:  转写或删除字符</li><li><code>sed</code>: 用于文本过滤和转换的流编辑器</li><li><code>aspell</code>: 交互式拼写检查器</li></ul><h2 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h2><ul><li><code>cat</code>: <code>cancatenate files and print on the stanard output</code> 拼接文本并显示到标准输出</li><li><strong>options</strong>:<ul><li><code>-A, --show-all</code>  equivalent to <strong>-vET</strong><ul><li>显示非打印字符和结束字符</li></ul></li><li><code>-n, --number</code> number all output lines<ul><li>显示行号</li></ul></li><li><code>-s, --squeeze-blank</code> suppress repeated empty output lines<ul><li>去除重复的空行（非空白行）</li><li>拼接多个文件时，如果上一个文件末尾有一行空行，下一个文件开头有一行空行，将会合并成一个空行</li></ul></li><li></li></ul></li></ul><h2 id="sort命令"><a href="#sort命令" class="headerlink" title="sort命令"></a>sort命令</h2><ul><li><a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Asort">linux文本命令：sort</a></li></ul><h2 id="uniq-命令"><a href="#uniq-命令" class="headerlink" title="uniq 命令"></a>uniq 命令</h2><ul><li><a href="/2022/06/19/linux%E6%96%87%E6%9C%AC%E5%91%BD%E4%BB%A4%EF%BC%9Auniq">linux文本命令：uniq</a></li></ul><h2 id="cut命令：切片与切块"><a href="#cut命令：切片与切块" class="headerlink" title="cut命令：切片与切块"></a>cut命令：切片与切块</h2>]]></content>
       
       
       <categories>

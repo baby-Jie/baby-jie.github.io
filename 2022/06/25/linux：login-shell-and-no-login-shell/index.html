@@ -11,7 +11,7 @@
   
   <title>
     
-      Category 
+      linux：login shell and no login shell 
       
       
       |
@@ -148,19 +148,194 @@
 
 
   
-  <!-- 分类页 url形式：https://yoursite/categories/ -->
-  <div class="container category-index">
-    <div>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/dos/">dos</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/c/">c</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/software/">software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/wpf/">wpf</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/plan/">plan</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/bash/">bash</a><span class="category-list-count">1</span></li></ul>
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">linux：login shell and no login shell</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2022-06-25 19:13:28
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/shell/" title="shell">
+                    <b>#</b> shell
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/linux/" title="linux">
+                    <b>#</b> linux
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/shell/" title="shell">
+                    <b>#</b> shell
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="linux：login-shell-and-no-login-shell"><a href="#linux：login-shell-and-no-login-shell" class="headerlink" title="linux：login shell and no login shell"></a>linux：login shell and no login shell</h1><ul>
+<li><p>先说结论，自己摸索下来（centos）的结果</p>
+<ul>
+<li><p><code>login shell(su - username)</code>:</p>
+<ul>
+<li><code>/etc/profile</code></li>
+<li><code>~/.bash_profile</code></li>
+<li>退出时执行 <code>~/.bash_logout</code></li>
+</ul>
+</li>
+<li><p><code>no login shell(su name)</code>:</p>
+<ul>
+<li><code>~/.bashrc</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="login-shell"><a href="#login-shell" class="headerlink" title="login shell"></a>login shell</h2><ul>
+<li><p>结论：依次执行 <code>/etc/profile</code> and <code>~/.bash_profile</code> 两个脚本文件，切换到用户的家目录</p>
+</li>
+<li><p>通过命令 <code>su - smx</code> 或者 ssh远程登陆 </p>
+</li>
+<li><p>会自动执行哪些 <code>shell</code>脚本</p>
+<ol>
+<li><p>首先执行的是 <code>/etc/profile</code> 脚本</p>
+</li>
+<li><p>其次执行的是 <code>~/.bash_profile</code> 脚本</p>
+<ul>
+<li><p>在 <code>~/.bash_profile</code> 脚本中又执行了 <code>~/.bashrc</code> 脚本</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .bash_profile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Get the aliases and functions</span></span><br><span class="line"><span class="keyword">if</span> [ -f ~/.bashrc ]; <span class="keyword">then</span></span><br><span class="line">	. ~/.bashrc</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>在 <code>~/.bashrc</code>脚本中又执行了 <code>/etc/bashrc</code> 脚本</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .bashrc</span></span><br><span class="line"><span class="keyword">if</span> [ -f /etc/bashrc ]; <span class="keyword">then</span></span><br><span class="line">	. /etc/bashrc</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>如果在上面四个脚本的末尾都添加一句打印信息，那么登陆shell的执行结果应该是</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this is /etc/profile</span><br><span class="line">this is /etc/bashrc</span><br><span class="line">this is .bashrc for root user</span><br><span class="line">this is .bash_profile for root user</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>退出时会执行 <code>~/.bash_logout</code> 脚本文件</p>
+</li>
+</ul>
+<h2 id="no-login-shell"><a href="#no-login-shell" class="headerlink" title="no login shell"></a>no login shell</h2><ul>
+<li>结论: 只执行 <code>~/.bashrc</code> 脚本文件，且去切换当前目录</li>
+<li>通过命令 <code>su smx</code> 来切换用户</li>
+<li>只会执行 <code>~/.bashrc</code> 脚本文件<ul>
+<li><code>~/.bashrc</code> 内部 调用了 <code>/etc/bashrc</code></li>
+</ul>
+</li>
+<li>退出时不会执行 <code>~/.bash_logout</code> 脚本文件</li>
+</ul>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ul>
+<li>环境变量最好写在 <code>~/.bashrc</code> 文件中，因为不管 <code>login shell</code> 还是 <code>no login shell</code> 都会执行 <code>~/.bashrc</code></li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/06/25/linux%EF%BC%9Awhich%E3%80%81locate%E3%80%81find%E5%91%BD%E4%BB%A4%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2022-06-25 19:13:28
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/shell/" title="shell">
+                        <b>#</b> shell
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/linux/" title="linux">
+                        <b>#</b> linux
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/shell/" title="shell">
+                        <b>#</b> shell
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#linux%EF%BC%9Alogin-shell-and-no-login-shell"><span class="toc-text">linux：login shell and no login shell</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#login-shell"><span class="toc-text">login shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#no-login-shell"><span class="toc-text">no login shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol></li></ol>
+      
     </div>
   </div>
-  
 
   
+<script src="/js/catalog.js"></script>
 
-  
 
-  
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
 
         
 <div class="footer">
@@ -421,12 +596,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + categories + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2Fcategories%2Findex.html + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + linux%EF%BC%9Alogin%20shell%20and%20no%20login%20shell + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F25%2Flinux%25EF%25BC%259Alogin-shell-and-no-login-shell%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/categories/index.html" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/25/linux%EF%BC%9Alogin-shell-and-no-login-shell/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
