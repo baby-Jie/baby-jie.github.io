@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>linux：重定向</title>
+      <link href="/2022/06/26/linux%EF%BC%9A%E9%87%8D%E5%AE%9A%E5%90%91/"/>
+      <url>/2022/06/26/linux%EF%BC%9A%E9%87%8D%E5%AE%9A%E5%90%91/</url>
+      
+        <content type="html"><![CDATA[<h1 id="linux：-重定向"><a href="#linux：-重定向" class="headerlink" title="linux： 重定向"></a>linux： 重定向</h1><ul><li><p><code>&lt;</code>: 标准输入重定向</p></li><li><p><code>&gt; or 1&gt;</code>: 标准输出重定向</p></li><li><p><code>2&gt;</code>: 标准错误重定向</p></li><li><p><code>&amp;&gt;</code>: 混合输出重定向</p></li><li><p>准备 <code>redirect.sh</code></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"hello standard output"</span></span><br><span class="line"><span class="built_in">ls</span> -l xxx</span><br></pre></td></tr></tbody></table></figure><ul><li><p>先执行一次</p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bash redirect.sh</span></span><br><span class="line">hello standard output</span><br><span class="line"><span class="built_in">ls</span>: cannot access xxx: No such file or directory</span><br></pre></td></tr></tbody></table></figure><ul><li>第一行是标准输出</li><li>第二行是错误输出</li></ul></li></ul></li></ul><h2 id="标准输出重定向"><a href="#标准输出重定向" class="headerlink" title="标准输出重定向"></a>标准输出重定向</h2><ul><li><code>cat &lt; redirect.sh</code></li></ul><h1 id="标准输出重定向-1"><a href="#标准输出重定向-1" class="headerlink" title="标准输出重定向"></a>标准输出重定向</h1><ul><li><p><code>bash redirect.sh &gt; output.txt</code></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bash redirect.sh &gt; output.txt</span></span><br><span class="line"><span class="built_in">ls</span>: cannot access xxx: No such file or directory</span><br></pre></td></tr></tbody></table></figure><ul><li>此时标准输出已经重定向到 <strong>output.txt</strong> 中，所以只输出错误输出</li></ul></li></ul><h2 id="标准输出重定向-2"><a href="#标准输出重定向-2" class="headerlink" title="标准输出重定向"></a>标准输出重定向</h2><ul><li><p><code>bash redirect.sh 2&gt; error.txt</code></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bash redirect.sh 2&gt; error.txt</span></span><br><span class="line">hello standard output</span><br></pre></td></tr></tbody></table></figure><ul><li>此时标准错误已经重定向到 <strong>error.txt</strong>中，所以只输出标准输出</li></ul></li></ul><h2 id="混合输出重定向"><a href="#混合输出重定向" class="headerlink" title="混合输出重定向"></a>混合输出重定向</h2><ul><li><p><code>bash redirect.sh &amp;&gt; mix.txt</code></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bash redirect.sh &amp;&gt; mix.txt</span></span><br><span class="line"><span class="comment"># cat mix.txt</span></span><br><span class="line">hello standard output</span><br><span class="line"><span class="built_in">ls</span>: cannot access xxx: No such file or directory</span><br></pre></td></tr></tbody></table></figure></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> bash </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> bash </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux：login shell and no login shell</title>
       <link href="/2022/06/25/linux%EF%BC%9Alogin-shell-and-no-login-shell/"/>
       <url>/2022/06/25/linux%EF%BC%9Alogin-shell-and-no-login-shell/</url>
