@@ -11,7 +11,7 @@
   
   <title>
     
-      dos命令del与rd 
+      dos：reg命令详解 
       
       
       |
@@ -157,11 +157,11 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">dos命令del与rd</div>
+      <div class="post-title">dos：reg命令详解</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="更新时间"></i>
-          2022-06-18 10:04:04
+          2022-06-27 05:45:49
         </span>
         
               <span class="post-categories">
@@ -194,62 +194,33 @@
           
       </div>
       <div class="markdown-body">
-        <h1 id="dos命令del与rd"><a href="#dos命令del与rd" class="headerlink" title="dos命令del与rd"></a>dos命令del与rd</h1><h2 id="del命令"><a href="#del命令" class="headerlink" title="del命令"></a>del命令</h2><ul>
-<li>del: 删除文件</li>
-<li>options:<ul>
-<li><code>/q</code>: 安静模式，删除全局通配符时，不要求确认</li>
-<li><code>/s</code>: 递归删除子目录中的文件（但是不会删除子目录）</li>
+        <h1 id="dos：reg命令详解"><a href="#dos：reg命令详解" class="headerlink" title="dos：reg命令详解"></a>dos：reg命令详解</h1><ul>
+<li><p>查看 <code>reg</code> 命令的帮助</p>
+<figure class="highlight cmd"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">REG Operation [Parameter List]</span><br><span class="line"></span><br><span class="line">  Operation  [ QUERY   | ADD    | DELETE  | <span class="built_in">COPY</span>    |</span><br><span class="line">               SAVE    | LOAD   | UNLOAD  | <span class="built_in">RESTORE</span> |</span><br><span class="line">               COMPARE | EXPORT | IMPORT  | FLAGS ]</span><br><span class="line"></span><br><span class="line">返回代码: (除了 REG COMPARE)</span><br><span class="line"></span><br><span class="line">  <span class="number">0</span> - 成功</span><br><span class="line">  <span class="number">1</span> - 失败</span><br><span class="line"></span><br><span class="line">要得到有关某个操作的帮助，请键入:</span><br><span class="line"></span><br><span class="line">  REG Operation /?</span><br><span class="line"></span><br><span class="line">例如:</span><br><span class="line"></span><br><span class="line">  REG QUERY /?</span><br><span class="line">  REG ADD /?</span><br><span class="line">  REG DELETE /?</span><br><span class="line">  REG <span class="built_in">COPY</span> /?</span><br><span class="line">  REG SAVE /?</span><br><span class="line">  REG <span class="built_in">RESTORE</span> /?</span><br><span class="line">  REG LOAD /?</span><br><span class="line">  REG UNLOAD /?</span><br><span class="line">  REG COMPARE /?</span><br><span class="line">  REG EXPORT /?</span><br><span class="line">  REG IMPORT /?</span><br><span class="line">  REG FLAGS /?</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
+<h2 id="reg-query-查询注册表键值"><a href="#reg-query-查询注册表键值" class="headerlink" title="reg query: 查询注册表键值"></a>reg query: 查询注册表键值</h2><ul>
+<li><p>查看帮助: <code>reg query /?</code></p>
 </li>
-<li>notes: <ul>
-<li><code>/q /s</code> 要这么用，不能连着用: <code>/qs</code></li>
+<li><p>查询 <code>AutoRun</code> 键值：</p>
+<figure class="highlight cmd"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ reg query "hklm\software\microsoft\command processor" /v AutoRun</span><br><span class="line"></span><br><span class="line">HKEY_LOCAL_MACHINE\software\microsoft\command processor</span><br><span class="line">    AutoRun    REG_SZ    F:\softwares\quick\scripts\<span class="built_in">start</span>.bat</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
+<h2 id="reg-add-添加注册表键值（管理员权限）"><a href="#reg-add-添加注册表键值（管理员权限）" class="headerlink" title="reg add: 添加注册表键值（管理员权限）"></a>reg add: 添加注册表键值（管理员权限）</h2><ul>
+<li><p>查看帮助: <code>reg add /?</code></p>
 </li>
-</ul>
-<h2 id="rd命令"><a href="#rd命令" class="headerlink" title="rd命令"></a>rd命令</h2><ul>
-<li><code>rd</code> 是 <code>rmdir</code> 的缩写，两个命令是等价的，用于删除文件夹和文件</li>
-<li>options:<ul>
-<li><code>/q</code>: 安静模式，带 <code>/s</code> 删除目录树时不要求确认</li>
-<li><code>/s</code>: 递归删除子目录和子文件</li>
-</ul>
+<li><p>添加 <code>hklm\software\microsoft\command processo</code> test 键 类型为 <code>REG_SZ</code> 值为: <code>hello smx</code></p>
+<figure class="highlight cmd"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ reg add "hklm\software\microsoft\command processo" /v test /t reg_sz /d "hello smx"</span><br><span class="line">操作成功完成。</span><br><span class="line"></span><br><span class="line">$ reg query "hklm\software\microsoft\command processor" /v test </span><br><span class="line"></span><br><span class="line">HKEY_LOCAL_MACHINE\software\microsoft\command processor</span><br><span class="line">    test    REG_SZ    @<span class="built_in">echo</span> hello1</span><br></pre></td></tr></tbody></table></figure>
 </li>
-<li>notes:<ul>
-<li><code>/q /s</code> 要这么用，不能连着用: <code>/qs</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="questions"><a href="#questions" class="headerlink" title="questions"></a>questions</h2><ul>
-<li>删除某个当前目录下所有的日志文件（以.log结尾）: <code>del /q *.log</code></li>
-<li>删除当前目录下所有文件: <code>del /q *</code></li>
-<li><code>del /q /s *</code> 会发生什么：删除当前目录下所有文件和递归删除子目录下的所有文件（不会删除子目录）</li>
-<li>删除test文件夹: <code>rd /q /s  test</code></li>
-</ul>
-<h2 id="practices"><a href="#practices" class="headerlink" title="practices"></a>practices</h2><ul>
-<li><p>准备 <code>prepare.bat</code></p>
-<figure class="highlight bat"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">md</span> test</span><br><span class="line"><span class="built_in">cd</span> test </span><br><span class="line"><span class="built_in">echo</span> <span class="number">1</span>.txt &gt; <span class="number">1</span>.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="number">2</span>.txt &gt; <span class="number">2</span>.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="number">3</span>.txt &gt; <span class="number">3</span>.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="number">1</span>.txt &gt; <span class="number">1</span>.bak</span><br><span class="line"><span class="built_in">md</span> subfolder</span><br><span class="line"><span class="built_in">cd</span> subfolder</span><br><span class="line"><span class="built_in">echo</span> sub.txt &gt; sub.txt</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li><p>删除 test 目录下的所有的 以<code>txt</code>结尾文件: <code>del /q *.txt</code></p>
-</li>
-<li><p>删除 test 目录下的所有文件(包括子文件夹中的文件，不删除目录): <code>del /q /s *</code></p>
-</li>
-<li><p>删除test目录: <code>rd /q /s test</code></p>
-</li>
-</ul>
-<h2 id="extensions"><a href="#extensions" class="headerlink" title="extensions"></a>extensions</h2><ul>
-<li><p>如何以不显示控制台的方式执行一个bat脚本:</p>
-<ol>
-<li><p>使用vb脚本去运行bat脚本</p>
-<figure class="highlight vb"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> shell=wscript.createObject(<span class="string">"wscript.shell"</span>)</span><br><span class="line">run=shell.Run(<span class="string">"F:\softwares\quick\scripts\work\test.bat"</span>, <span class="number">0</span>)</span><br></pre></td></tr></tbody></table></figure>
-
+<li><p>note</p>
 <ul>
-<li><code>0</code>: 不显示控制台</li>
-<li><code>1</code>: 显示控制台</li>
+<li>不仅可以添加键值，还可以更新键值</li>
 </ul>
 </li>
-<li><p>将bat脚本转成exe文件</p>
+</ul>
+<h1 id="reg-del-删除注册表的键值（管理员权限）"><a href="#reg-del-删除注册表的键值（管理员权限）" class="headerlink" title="reg del: 删除注册表的键值（管理员权限）"></a>reg del: 删除注册表的键值（管理员权限）</h1><ul>
+<li><p>查看帮助: <code>reg del /?</code></p>
 </li>
-</ol>
-</li>
+<li><p>删除 <code>hklm\software\microsoft\command processo</code> test 键 </p>
+<figure class="highlight cmd"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ reg delete "hklm\software\microsoft\command processor" /v test /f</span><br><span class="line">操作成功完成。</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 
       </div>
@@ -257,7 +228,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2022/06/17/windows%E5%92%8Clinux%E4%B8%AD%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%8D%A2%E8%A1%8C/" target="_self">
+              <a href="/2022/06/26/linux%EF%BC%9A%E5%89%8D%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>上一页</span>
               </a>
@@ -266,7 +237,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime" title="更新时间"></i>
-              2022-06-18 10:04:04
+              2022-06-27 05:45:49
             </span>
             
                   <span class="post-categories">
@@ -300,7 +271,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2022/06/18/linux%E5%92%8Cwindows%E4%B8%8B%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E6%8D%A2%E8%A1%8C%E5%8C%BA%E5%88%AB/" target="_self">
+              <a href="/2022/06/27/linux%EF%BC%9A%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA/" target="_self">
                 <span>下一页</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -317,7 +288,7 @@
     <div class="title">目录</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#dos%E5%91%BD%E4%BB%A4del%E4%B8%8Erd"><span class="toc-text">dos命令del与rd</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#del%E5%91%BD%E4%BB%A4"><span class="toc-text">del命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rd%E5%91%BD%E4%BB%A4"><span class="toc-text">rd命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#questions"><span class="toc-text">questions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#practices"><span class="toc-text">practices</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#extensions"><span class="toc-text">extensions</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#dos%EF%BC%9Areg%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="toc-text">dos：reg命令详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#reg-query-%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%94%AE%E5%80%BC"><span class="toc-text">reg query: 查询注册表键值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reg-add-%E6%B7%BB%E5%8A%A0%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%94%AE%E5%80%BC%EF%BC%88%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%EF%BC%89"><span class="toc-text">reg add: 添加注册表键值（管理员权限）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#reg-del-%E5%88%A0%E9%99%A4%E6%B3%A8%E5%86%8C%E8%A1%A8%E7%9A%84%E9%94%AE%E5%80%BC%EF%BC%88%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%EF%BC%89"><span class="toc-text">reg del: 删除注册表的键值（管理员权限）</span></a></li></ol>
       
     </div>
   </div>
@@ -602,12 +573,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + dos%E5%91%BD%E4%BB%A4del%E4%B8%8Erd + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F18%2Fdos%25E5%2591%25BD%25E4%25BB%25A4del%25E4%25B8%258Erd%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + dos%EF%BC%9Areg%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3 + '&url=' + http%3A%2F%2Fbaby-jie.github.io%2F2022%2F06%2F27%2Fdos%25EF%25BC%259Areg%25E5%2591%25BD%25E4%25BB%25A4%25E8%25AF%25A6%25E8%25A7%25A3%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/18/dos%E5%91%BD%E4%BB%A4del%E4%B8%8Erd/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://baby-jie.github.io/2022/06/27/dos%EF%BC%9Areg%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
